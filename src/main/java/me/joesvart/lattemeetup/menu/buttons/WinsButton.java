@@ -15,7 +15,7 @@ public class WinsButton extends Button {
     public ItemStack getButtonItem(Player player) {
         PlayerData playerData = PlayerData.getByName(player.getName());
 
-        return new ItemBuilder(Material.BARRIER)
+        return new ItemBuilder(Material.GOLDEN_APPLE)
             .name(CC.translate("&2&lYour wins"))
             .lore(CC.translate("&7&m--------------------------"))
             .lore(CC.translate("&7Wins: &f") + playerData.getWins())

@@ -15,7 +15,7 @@ public class KillsButton extends Button {
     public ItemStack getButtonItem(Player player) {
         PlayerData playerData = PlayerData.getByName(player.getName());
 
-        return new ItemBuilder(Material.BARRIER)
+        return new ItemBuilder(Material.IRON_SWORD)
             .name(CC.translate("&2&lYour kills"))
             .lore(CC.translate("&7&m--------------------------"))
             .lore(CC.translate("&7Kills: &f") + playerData.getKills())

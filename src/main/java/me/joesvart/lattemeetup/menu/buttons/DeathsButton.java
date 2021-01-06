@@ -15,7 +15,7 @@ public class DeathsButton extends Button {
     public ItemStack getButtonItem(Player player) {
         PlayerData playerData = PlayerData.getByName(player.getName());
 
-        return new ItemBuilder(Material.BARRIER)
+        return new ItemBuilder(Material.SKULL_ITEM)
             .name(CC.translate("&2&lYour deaths"))
             .lore(CC.translate("&7&m--------------------------"))
             .lore(CC.translate("&7Deaths: &f") + playerData.getDeaths())
