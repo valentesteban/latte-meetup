@@ -1,0 +1,5 @@
+name: ${project.name}
+version: ${project.version}
+authors: [Joesvart]
+description: ${project.description}
+main: me.joesvart.lattemeetup.LatteMeetup
