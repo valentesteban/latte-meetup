@@ -18,10 +18,9 @@ import java.util.stream.Collectors;
 @Setter
 public class PlayerData {
 
-    @Getter
-    private static Map<UUID, PlayerData> playerDatas = new HashMap<>();
+    @Getter private static Map<UUID, PlayerData> playerDatas = new HashMap<>();
 
-    private int wins, kills, deaths, played, gameKills;
+    @Setter private int wins, kills, deaths, played, gameKills;
 
     private String name, disturb;
     private UUID uuid;
