@@ -19,6 +19,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class GameManager {
             data.setPlayed(data.getPlayed() + 1);
             data.setPlayerState(PlayerState.PLAYING);
             player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1F, 1F);
+            player.sendTitle(CC.GREEN + CC.B + "&a&lThe game has begun", CC.YELLOW + "Good luck!");
         });
 
         /* Game error message */
@@ -111,12 +113,14 @@ public class GameManager {
         winner.setWins(winner.getWins() + 1);
         data.setWinner(winner.getName());
 
+
         Clickable clickable = new Clickable(CC.SECONDARY + "Winner: ");
         clickable.add(CC.PRIMARY + data.getWinner(), CC.GREEN + "View inventory.", "/uinv " + data.getWinner());
         Bukkit.getOnlinePlayers().forEach(o -> clickable.sendToPlayer(o));
         Msg.sendMessage(CC.SECONDARY + "Kills: " + CC.PRIMARY + winner.getGameKills() + CC.GRAY + " - " + CC.SECONDARY + "Total Wins: " + CC.PRIMARY + winner.getWins());
         Msg.sendMessage("&7&m" + StringUtils.repeat('-', 45));
         data.setGameState(GameState.WINNER);
+
         new EndTask();
     }
 
