@@ -132,9 +132,11 @@ public class MeetupBoard implements CombustionAdapter {
 			board.add(CC.PRIMARY + "Kills: " + CC.SECONDARY + playerData.getGameKills());
 		}
 
-		board.add("");
-		board.add(CC.PRIMARY + "Border: " + CC.SECONDARY + data.getBorder() + data.getFormattedBorderStatus());
 		board.add(CC.PRIMARY + "Your ping: " + CC.SECONDARY + PlayerUtils.getPing(player));
+
+		board.add("");
+		board.add(CC.PRIMARY + "Border: " + CC.SECONDARY + data.getBorder());
+		board.add(CC.PRIMARY + "Shrinking: " + CC.SECONDARY + data.getFormattedBorderStatus());
 
 		if(playerData.isNoCleanActive()) {
 			board.add("");
