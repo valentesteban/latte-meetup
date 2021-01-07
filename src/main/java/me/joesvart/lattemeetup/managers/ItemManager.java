@@ -19,7 +19,7 @@ public class ItemManager {
             .build());
 
         player.getInventory().setItem(8, new ItemBuilder(Material.BED)
-            .name(CC.GREEN + "Leave to Lobby")
+            .name(CC.GREEN + "Return to Lobby")
             .lore(CC.GRAY + "Right click to return to the main Lobby.")
             .build());
         
@@ -37,9 +37,14 @@ public class ItemManager {
             .lore(CC.GRAY + ("Right click to teleport to a random player."))
             .build());
 
-        player.getInventory().setItem(8, new ItemBuilder(Material.COMPASS)
+        player.getInventory().setItem(4, new ItemBuilder(Material.COMPASS)
             .name(CC.PINK + "Navigation Compass")
             .lore(CC.GRAY + "Right click to teleport to that position.")
+            .build());
+
+        player.getInventory().setItem(8, new ItemBuilder(Material.BED)
+            .name(CC.GREEN + "Return to Lobby")
+            .lore(CC.GRAY + "Right click to return to the main Lobby.")
             .build());
         
         player.updateInventory();
