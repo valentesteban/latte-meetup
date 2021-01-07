@@ -43,7 +43,7 @@ public class GameData {
     }
 
     public String getFormattedBorderStatus() {
-        return borderTime > 0 ? CC.GRAY + " (" + (borderTime <= 60 ? borderTime + "s" : (borderTime / 60 + 1) + "m") + ")" : "";
+        return borderTime > 0 ? CC.SECONDARY + "" + (borderTime <= 60 ? borderTime + "s" : (borderTime / 60 + 1) + "m") + "" : "";
     }
 
     public int decrementBorderTime() {
