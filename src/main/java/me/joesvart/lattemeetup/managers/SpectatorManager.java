@@ -38,10 +38,12 @@ public class SpectatorManager {
         }
 
         Bukkit.getScheduler().runTask(LatteMeetup.getInstance(), () -> Bukkit.getOnlinePlayers().forEach(online -> online.hidePlayer(player)));
-        player.sendMessage(CC.PRIMARY + "You are now speaking in " + CC.GRAY + "Spectator" + CC.PRIMARY + " chat.");
         player.sendMessage("");
         player.sendMessage(CC.GRAY + "You are now in spectator mode.");
         player.setFlySpeed(0.2F);
+
+        /* Send a title saying you has been killd, and now you are a spectator. */
+        player.sendTitle(CC.RED + CC.B + "DEAD", CC.SECONDARY + "You are now a spectator!");
 
         PlayerData data = PlayerData.getByName(player.getName());
         data.setPlayerState(PlayerState.SPECTATING);
