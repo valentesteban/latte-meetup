@@ -200,7 +200,7 @@ public class PlayerListener implements Listener {
 
             if(PlayerData.getByName(player.getName()).isSpectator()) {
                 switch (player.getItemInHand().getType()) {
-                    case EMERALD:
+                    case ITEM_FRAME:
                         if(PlayerData.getAlivePlayers() == 0) {
                             player.sendMessage(CustomColor.translate("&cThere are currently no alive players."));
                             return;
