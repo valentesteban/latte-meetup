@@ -1,6 +1,6 @@
-package me.joesvart.lattemeetup.menu.menus;
+package me.joesvart.lattemeetup.leaderboards.menus;
 
-import me.joesvart.lattemeetup.menu.buttons.*;
+import me.joesvart.lattemeetup.leaderboards.buttons.*;
 import me.joesvart.lattemeetup.util.menu.Button;
 import me.joesvart.lattemeetup.util.menu.Menu;
 import org.bukkit.entity.Player;
@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatsMenu extends Menu {
+public class LeaderboardsMenu extends Menu {
 
     @Override
     public String getTitle(Player player) {

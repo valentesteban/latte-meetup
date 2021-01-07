@@ -1,4 +1,4 @@
-package me.joesvart.lattemeetup.menu.buttons;
+package me.joesvart.lattemeetup.leaderboards.buttons;
 
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.util.chat.CC;

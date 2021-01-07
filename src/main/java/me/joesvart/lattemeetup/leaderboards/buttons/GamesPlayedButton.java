@@ -1,4 +1,4 @@
-package me.joesvart.lattemeetup.menu.buttons;
+package me.joesvart.lattemeetup.leaderboards.buttons;
 
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.util.chat.CC;
@@ -9,16 +9,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
-public class DeathsButton extends Button {
+public class GamesPlayedButton extends Button {
 
     @Override
     public ItemStack getButtonItem(Player player) {
         PlayerData playerData = PlayerData.getByName(player.getName());
 
-        return new ItemBuilder(Material.SKULL_ITEM)
-            .name(CC.translate("&2&lYour deaths"))
+        return new ItemBuilder(Material.EXP_BOTTLE)
+            .name(CC.translate("&2&lYour games"))
             .lore(CC.translate("&7&m--------------------------"))
-            .lore(CC.translate("&7Deaths: &f") + playerData.getDeaths())
+            .lore(CC.translate("&7Games played: &f") + playerData.getPlayed())
             .lore(CC.translate(""))
             .lore(CC.translate("&8The statistics will be updated"))
             .lore(CC.translate("&8after every game."))
