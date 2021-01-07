@@ -16,7 +16,7 @@ public class GamesPlayedButton extends Button {
         PlayerData playerData = PlayerData.getByName(player.getName());
 
         return new ItemBuilder(Material.EXP_BOTTLE)
-            .name(CC.translate("&2&lYour games"))
+            .name(CC.translate("&2Your games"))
             .lore(CC.translate("&7&m--------------------------"))
             .lore(CC.translate("&7Games played: &f") + playerData.getPlayed())
             .lore(CC.translate(""))
