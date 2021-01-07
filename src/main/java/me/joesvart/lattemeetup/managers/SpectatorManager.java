@@ -89,8 +89,8 @@ public class SpectatorManager {
         int max = (int) Math.ceil(PlayerData.getAlivePlayers() / 18.0);
 
         Inventory inventory = Bukkit.createInventory(null, 27, CustomColor.translate("Alive Players - " + page + "/" + (max == 0 ? 1 : max)));
-        inventory.setItem(0, new ItemBuilder(Material.ARROW).name(CC.SECONDARY + "Previous Page").build());
-        inventory.setItem(8, new ItemBuilder(Material.ARROW).name(CC.SECONDARY + "Next Page").build());
+        inventory.setItem(0, new ItemBuilder(Material.ARROW).name(CC.GRAY + "Previous Page").build());
+        inventory.setItem(8, new ItemBuilder(Material.ARROW).name(CC.GREEN + "Next Page").build());
 
         int minIndex = (int) ((double) (page - 1) * 18);
         int maxIndex = (int) ((double) (page) * 18);
@@ -106,10 +106,10 @@ public class SpectatorManager {
                 number -= (int) ((double) (18) * (page - 1)) - 9;
 
                 inventory.setItem(number, new ItemBuilder(Material.SKULL_ITEM)
-                        .name(CC.SECONDARY + data.getName())
-                        .lore(Arrays.asList(
-                                "",
-                                CC.PRIMARY + "Click to teleport...")).build());
+                        .name(CC.PRIMARY + data.getName())
+                        .lore(CC.GRAY + CC.STRIKE_THROUGH + "-----------------------------")
+                        .lore(CC.GREEN + "Click to teleport to " + CC.PRIMARY + data.getName())
+                        .lore(CC.GRAY + CC.STRIKE_THROUGH + "-----------------------------").build());
             }
         });
 
@@ -144,15 +144,6 @@ public class SpectatorManager {
         inventory.setItem(50, ItemUtil.reloreItem(ItemUtil.createItem(Material.BREWING_STAND_ITEM, CC.PRIMARY + "Potion Effects", potionEffectStrings.size()), potionEffectStrings.toArray(new String[]{})));
 
         PlayerData data = PlayerData.getByName(player.getName());
-
-        inventory.setItem(51, new ItemBuilder(Material.SKULL_ITEM).name(CC.PRIMARY + "Stats")
-                .lore(Arrays.asList(
-                        "",
-                        CC.SECONDARY + "Wins: " + CC.PRIMARY + data.getWins(),
-                        CC.SECONDARY + "Game Kills: " + CC.PRIMARY + data.getGameKills(),
-                        CC.SECONDARY + "Played: " + CC.PRIMARY + data.getPlayed(),
-                        ""
-                )).build());
 
         inventory.setItem(45, new ItemBuilder(Material.PAPER).name(CC.PRIMARY + "Close Preview").build());
         inventory.setItem(53, new ItemBuilder(Material.PAPER).name(CC.PRIMARY + "Close Preview").build());
