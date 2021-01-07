@@ -81,14 +81,14 @@ public class SpectatorManager {
 
         if(target != null) {
             player.teleport(target);
-            player.sendMessage(CC.SECONDARY + "Teleporting you to " + target.getDisplayName() + CC.SECONDARY + ".");
+            player.sendMessage(CC.GRAY + "Teleporting you to " + CC.PRIMARY + target.getDisplayName() + CC.GRAY + ".");
         }
     }
 
     public Inventory getInventory(int page) {
         int max = (int) Math.ceil(PlayerData.getAlivePlayers() / 18.0);
 
-        Inventory inventory = Bukkit.createInventory(null, 27, CustomColor.translate("Alive Players - " + page + "/" + (max == 0 ? 1 : max)));
+        Inventory inventory = Bukkit.createInventory(null, 27, CustomColor.translate("Player Remaining ┃ " + page + "/" + (max == 0 ? 1 : max)));
         inventory.setItem(0, new ItemBuilder(Material.ARROW).name(CC.GRAY + "Previous Page").build());
         inventory.setItem(8, new ItemBuilder(Material.ARROW).name(CC.GREEN + "Next Page").build());
 
