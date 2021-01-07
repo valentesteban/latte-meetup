@@ -3,7 +3,7 @@ package me.joesvart.lattemeetup.listeners;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.game.GameState;
-import me.joesvart.lattemeetup.menu.menus.StatsMenu;
+import me.joesvart.lattemeetup.leaderboards.menus.LeaderboardsMenu;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
 import me.joesvart.lattemeetup.scenario.Scenario;
@@ -176,7 +176,7 @@ public class PlayerListener implements Listener {
                     BungeeUtil.sendToServer(player, "hub");
                     break;
                 case EMERALD:
-                    new StatsMenu().openMenu(player);
+                    new LeaderboardsMenu().openMenu(player);
                     break;
                 case MUSHROOM_SOUP:
                     if(player.getHealth() <= 19.0D && !player.isDead()) {
