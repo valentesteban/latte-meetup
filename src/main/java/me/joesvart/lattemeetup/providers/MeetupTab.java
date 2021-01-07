@@ -91,6 +91,14 @@ public class MeetupTab implements TabAdapter {
 
         /* Third column */
 
+        // Beta warning
+        tabEntries.add(new TabEntry(2, 5, CC.translate("&4&lWARNING")));
+        tabEntries.add(new TabEntry(2, 7, CC.translate("&cThis plugin is a beta and")));
+        tabEntries.add(new TabEntry(2, 8, CC.translate("&cis under development")));
+        tabEntries.add(new TabEntry(2, 9, CC.translate("&cif you find some bug")));
+        tabEntries.add(new TabEntry(2, 10, CC.translate("&cplease contact with")));
+        tabEntries.add(new TabEntry(2, 11, CC.translate("&cthe Network.")));
+
         // Twitter
         tabEntries.add(new TabEntry(2, 17, CC.translate("&bTwitter")));
         tabEntries.add(new TabEntry(2, 18, CC.translate("&f@LatteMeetup")).setSkin(Skin.TWITTER_SKIN));
