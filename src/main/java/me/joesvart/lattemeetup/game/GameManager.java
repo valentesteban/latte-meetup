@@ -59,7 +59,7 @@ public class GameManager {
             data.setPlayed(data.getPlayed() + 1);
             data.setPlayerState(PlayerState.PLAYING);
             player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1F, 1F);
-            /* Do not work (i think) */
+            /* Send a title saying the game has started */
             player.sendTitle(CC.GREEN + CC.B + "The game has begun", CC.YELLOW + "Good luck!");
         });
 
