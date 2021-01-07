@@ -70,7 +70,7 @@ public class MeetupTab implements TabAdapter {
         }
         else {
             tabEntries.add(new TabEntry(0, 5, CC.translate("&2Game state")));
-            tabEntries.add(new TabEntry(0, 6, CC.translate("&cUnknown")));
+            tabEntries.add(new TabEntry(0, 6, CC.translate("&eStarting") + GameManager.getData().getLoading()));
         }
 
         // Store
