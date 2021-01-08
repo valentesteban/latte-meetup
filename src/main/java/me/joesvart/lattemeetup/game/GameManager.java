@@ -61,7 +61,7 @@ public class GameManager {
             player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1F, 1F);
 
             /* Send a title saying the game has started */
-            player.sendTitle(CC.GREEN + CC.B + "BEGUN", CC.SECONDARY + "Good luck!");
+            player.sendTitle(CC.GREEN + CC.B + "BEGUN", CC.YELLOW + "Good luck!");
         });
 
         /* Game error message */
