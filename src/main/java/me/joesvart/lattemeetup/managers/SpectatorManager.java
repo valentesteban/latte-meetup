@@ -28,13 +28,13 @@ public class SpectatorManager {
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0));
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.setGameMode(GameMode.CREATIVE);
+        player.setGameMode(GameMode.SURVIVAL);
 
         plugin.getItemManager().handleSpectatorInventory(player);
 
         if(Bukkit.getWorld("meetupworld") != null) {
             player.teleport(new Location(Bukkit.getWorld("meetupworld"), 0, 100, 0));
-            player.setGameMode(GameMode.CREATIVE);
+            player.setGameMode(GameMode.SURVIVAL);
         }
 
         Bukkit.getScheduler().runTask(LatteMeetup.getInstance(), () -> Bukkit.getOnlinePlayers().forEach(online -> online.hidePlayer(player)));
@@ -43,7 +43,7 @@ public class SpectatorManager {
         player.setFlySpeed(0.2F);
 
         /* Send a title saying you has been killd, and now you are a spectator. */
-        player.sendTitle(CC.RED + CC.B + "DEAD", CC.SECONDARY + "You are now a spectator!");
+        player.sendTitle(CC.RED + CC.B + "DEAD", CC.YELLOW + "You are now a spectator!");
 
         PlayerData data = PlayerData.getByName(player.getName());
         data.setPlayerState(PlayerState.SPECTATING);
