@@ -32,7 +32,7 @@ public class MeetupBoard implements CombustionAdapter {
 
 	@Override
 	public String getTitle(Player player) {
-		return CC.D_GREEN + CC.B + "UHC-Meetup";
+		return CC.D_GREEN + CC.B + "UHC Meetup";
 	}
 
 	@Override
