@@ -7,6 +7,7 @@ import net.minecraft.server.v1_8_R3.EntityLiving;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
@@ -90,6 +91,7 @@ public class DeathMessagesListener implements Listener {
             String color2 = ((CraftPlayer) event.getEntity()).getHandle().getLastDamager() != null ? ((CraftPlayer) event.getEntity()).getHandle().getLastDamager().getName().equals(player.getName()) ? CC.GREEN : CC.RED : CC.RED;
 
             player.sendMessage(getDeathMessage(message, event.getEntity(), getKiller(event), color1, color2) + CustomColor.translate(toAdd + CC.GRAY + "."));
+            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
         });
     }
 }
