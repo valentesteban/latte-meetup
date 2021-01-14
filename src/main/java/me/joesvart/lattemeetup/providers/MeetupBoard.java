@@ -1,6 +1,5 @@
 package me.joesvart.lattemeetup.providers;
 
-import javafx.animation.Animation;
 import lombok.Getter;
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.scoreboard.BoardAdapter;

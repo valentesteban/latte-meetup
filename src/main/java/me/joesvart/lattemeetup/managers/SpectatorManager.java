@@ -3,6 +3,7 @@ package me.joesvart.lattemeetup.managers;
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.LatteMeetup;
+import me.joesvart.lattemeetup.config.MessagesFile;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
 import me.joesvart.lattemeetup.util.chat.StringUtils;
@@ -32,8 +33,8 @@ public class SpectatorManager {
 
         plugin.getItemManager().handleSpectatorInventory(player);
 
-        if(Bukkit.getWorld("meetupworld") != null) {
-            player.teleport(new Location(Bukkit.getWorld("meetupworld"), 0, 100, 0));
+        if(Bukkit.getWorld("meetup_world") != null) {
+            player.teleport(new Location(Bukkit.getWorld("meetup_world"), 0, 100, 0));
             player.setGameMode(GameMode.SURVIVAL);
         }
 
@@ -42,8 +43,10 @@ public class SpectatorManager {
         player.sendMessage(ChatUtils.GRAY + "You are now in spectator mode.");
         player.setFlySpeed(0.2F);
 
-        /* Send a title saying you has been killd, and now you are a spectator. */
-        player.sendTitle(ChatUtils.RED + ChatUtils.B + "DEAD", ChatUtils.YELLOW + "You are now a spectator!");
+        /* Send a title saying you has been killed, and now you are a spectator. */
+        if (MessagesFile.getConfig().getBoolean("BOOLEANS.TITLES")) {
+            player.sendTitle(ChatUtils.RED + ChatUtils.B + "DEAD", ChatUtils.YELLOW + "You are now a spectator!");
+        }
 
         PlayerData data = PlayerData.getByName(player.getName());
         data.setPlayerState(PlayerState.SPECTATING);

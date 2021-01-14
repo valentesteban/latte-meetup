@@ -1,6 +1,7 @@
 package me.joesvart.lattemeetup.managers;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattemeetup.config.MessagesFile;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.scenario.Scenario;
@@ -39,7 +40,10 @@ public class VoteManager {
         votes.put(scenario, votes.get(scenario) + 1);
         PlayerData.getByName(player.getName()).setLastVoted(scenario.getName());
         player.sendMessage(ChatUtils.SECONDARY + "You have casted your vote for " + ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + ".");
-        MeetupUtils.handleSound(player, Sound.NOTE_PIANO);
+
+        if (MessagesFile.getConfig().getBoolean("BOOLEANS.SOUNDS")) {
+            MeetupUtils.handleSound(player, Sound.NOTE_PIANO);
+        }
     }
 
     public void handleRemove(Player player, Scenario newVote) {
@@ -47,7 +51,10 @@ public class VoteManager {
 
         if(data.getLastVoted().equals(newVote.getName())) {
             player.sendMessage(ChatUtils.RED + "You have already voted for " + newVote.getName() + ".");
-            MeetupUtils.handleSound(player, Sound.DIG_GRASS);
+
+            if (MessagesFile.getConfig().getBoolean("BOOLEANS.SOUNDS")) {
+                MeetupUtils.handleSound(player, Sound.DIG_GRASS);
+            }
             return;
         }
 

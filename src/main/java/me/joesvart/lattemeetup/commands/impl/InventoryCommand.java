@@ -13,9 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-public class InvCommand extends Command {
+public class InventoryCommand extends Command {
 
-    public InvCommand() {
+    public InventoryCommand() {
         super("uinv");
     }
 

@@ -24,7 +24,7 @@ public class StartCommand extends Command {
         }
 
         /* Insufficient permission message */
-        if(!sender.hasPermission("lattemeetup.staff")) {
+        if(!sender.hasPermission("lattemeetup.admin")) {
             sender.sendMessage(ChatUtils.RED + "You do not have permission for execute this command.");
             return true;
         }

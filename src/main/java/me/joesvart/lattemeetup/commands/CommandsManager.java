@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.commands;
 
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.commands.impl.InvCommand;
+import me.joesvart.lattemeetup.commands.impl.InventoryCommand;
 import me.joesvart.lattemeetup.commands.impl.StartCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,7 +15,7 @@ public class CommandsManager {
         Arrays.asList(
 
                 // Meetup Commands
-                new InvCommand(),
+                new InventoryCommand(),
                 new StartCommand()
         ).forEach(this::registerCommand);
     }

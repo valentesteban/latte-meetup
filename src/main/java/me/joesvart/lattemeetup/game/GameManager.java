@@ -3,6 +3,7 @@ package me.joesvart.lattemeetup.game;
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.chat.Clickable;
 import me.joesvart.lattemeetup.LatteMeetup;
+import me.joesvart.lattemeetup.config.MessagesFile;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
 import me.joesvart.lattemeetup.scenario.Scenario;
@@ -59,7 +60,9 @@ public class GameManager {
             player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1F, 1F);
 
             /* Send a title saying the game has started */
-            player.sendTitle(ChatUtils.GREEN + ChatUtils.B + "BEGUN", ChatUtils.YELLOW + "Good luck!");
+            if (MessagesFile.getConfig().getBoolean("BOOLEANS.TITLES")) {
+                player.sendTitle(ChatUtils.GREEN + ChatUtils.B + "BEGUN", ChatUtils.YELLOW + "Good luck!");
+            }
         });
 
         /* Game error message */
