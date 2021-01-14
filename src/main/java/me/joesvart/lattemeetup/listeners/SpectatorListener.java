@@ -1,9 +1,8 @@
 package me.joesvart.lattemeetup.listeners;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.player.PlayerData;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -55,7 +54,7 @@ public class SpectatorListener implements Listener {
 
 					if(displayName.contains("Next Page")) {
 						if(page + 1 > total) {
-							player.sendMessage(CustomColor.translate("&cThere are no more pages."));
+							player.sendMessage(ChatUtils.translate("&cThere are no more pages."));
 							return;
 						}
 
@@ -63,7 +62,7 @@ public class SpectatorListener implements Listener {
 						return;
 					} else if(displayName.contains("Previous Page")) {
 						if(page == 1) {
-							player.sendMessage(CustomColor.translate("&cYou are on the first page."));
+							player.sendMessage(ChatUtils.translate("&cYou are on the first page."));
 							return;
 						}
 
@@ -78,7 +77,7 @@ public class SpectatorListener implements Listener {
 
 						if(target != null) {
 							player.teleport(target);
-							player.sendMessage(CC.SECONDARY + "Teleporting you to " + target.getDisplayName() + CC.SECONDARY + ".");
+							player.sendMessage(ChatUtils.SECONDARY + "Teleporting you to " + target.getDisplayName() + ChatUtils.SECONDARY + ".");
 							return;
 						}
 					}
@@ -135,7 +134,7 @@ public class SpectatorListener implements Listener {
 			if(block.getType().equals(Material.CHEST) || block.getType().equals(Material.TRAPPED_CHEST) && !player.isSneaking()) {
 				event.setCancelled(true);
 
-				if(!player.hasPermission("meetup.staff")) {
+				if(!player.hasPermission("lattemeetup.staff")) {
 					return;
 				}
 
@@ -143,7 +142,7 @@ public class SpectatorListener implements Listener {
 				Inventory inventory = Bukkit.createInventory(null, chest.getInventory().getSize());
 				inventory.setContents(chest.getInventory().getContents());
 				player.openInventory(inventory);
-				player.sendMessage(CustomColor.translate("&7Opening silently..."));
+				player.sendMessage(ChatUtils.translate("&7Opening silently..."));
 			}
 		}
 

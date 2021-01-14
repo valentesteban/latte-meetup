@@ -1,6 +1,6 @@
 package me.joesvart.lattemeetup.util.menu.menus;
 
-import me.joesvart.lattemeetup.util.callback.TypeCallback;
+import me.joesvart.lattelibs.menu.callback.TypeCallback;
 import me.joesvart.lattemeetup.util.menu.Button;
 import me.joesvart.lattemeetup.util.menu.Menu;
 import me.joesvart.lattemeetup.util.menu.button.ConfirmationButton;

@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup.game;
 
-import me.joesvart.lattemeetup.util.chat.CC;
 import lombok.Getter;
 import lombok.Setter;
+import me.joesvart.lattelibs.chat.ChatUtils;
 
 @Getter
 @Setter
@@ -43,7 +43,7 @@ public class GameData {
     }
 
     public String getFormattedBorderStatus() {
-        return borderTime > 0 ? CC.SECONDARY + "" + (borderTime <= 60 ? borderTime + "s" : (borderTime / 60 + 1) + "m") + "" : "";
+        return borderTime > 0 ? ChatUtils.SECONDARY + "" + (borderTime <= 60 ? borderTime + "s" : (borderTime / 60 + 1) + "m") + "" : "";
     }
 
     public int decrementBorderTime() {

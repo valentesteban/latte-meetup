@@ -1,9 +1,9 @@
 package me.joesvart.lattemeetup.util.menu.pagination;
 
 import lombok.AllArgsConstructor;
-import me.joesvart.lattemeetup.util.chat.CC;
+import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.util.menu.Button;
-import me.joesvart.lattemeetup.util.other.ItemBuilder;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -26,7 +26,7 @@ public class PageFilterButton<T> extends Button {
         }
 
         List<String> lore = new ArrayList<>();
-        lore.add(CC.MENU_BAR);
+        lore.add(ChatUtils.MENU_BAR);
 
         for (PageFilter filter : menu.getFilters()) {
             String color;
@@ -48,12 +48,12 @@ public class PageFilterButton<T> extends Button {
             lore.add(decoration + color + icon + " " + filter.getName());
         }
 
-        lore.add(CC.MENU_BAR);
+        lore.add(ChatUtils.MENU_BAR);
         lore.add("&eLeft click to scroll.");
         lore.add("&eRight click to toggle a filter.");
-        lore.add(CC.MENU_BAR);
+        lore.add(ChatUtils.MENU_BAR);
 
-        return new ItemBuilder(Material.HOPPER)
+        return new ItemCreator(Material.HOPPER)
             .name("&7Filters")
             .lore(lore)
             .build();

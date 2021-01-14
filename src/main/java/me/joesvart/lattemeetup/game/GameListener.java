@@ -1,11 +1,10 @@
 package me.joesvart.lattemeetup.game;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
 import me.joesvart.lattemeetup.scenario.ScenarioManager;
 import me.joesvart.lattemeetup.scenario.types.TimeBombScenario;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
 import me.joesvart.lattemeetup.util.chat.Msg;
 import me.joesvart.lattemeetup.LatteMeetup;
 import org.bukkit.Bukkit;
@@ -104,7 +103,7 @@ public class GameListener implements Listener {
                 || item.getType() != Material.GOLDEN_APPLE
                 || item.getItemMeta() == null
                 || !item.getItemMeta().hasDisplayName()
-                || !item.getItemMeta().getDisplayName().equalsIgnoreCase(CustomColor.translate("&6Golden Head"))) {
+                || !item.getItemMeta().getDisplayName().equalsIgnoreCase(ChatUtils.translate("&6Golden Head"))) {
             return;
         }
 
@@ -133,7 +132,7 @@ public class GameListener implements Listener {
         double health = Math.ceil(entity.getHealth() - event.getFinalDamage()) / 2.0D;
 
         if(health > 0.0D) {
-            shooter.sendMessage(CustomColor.translate( entity.getDisplayName() + CC.SECONDARY + " is now at " + CC.PRIMARY + health + "&4" + Msg.HEART + CC.SECONDARY + "."));
+            shooter.sendMessage(ChatUtils.translate( entity.getDisplayName() + ChatUtils.SECONDARY + " is now at " + ChatUtils.PRIMARY + health + "&4" + Msg.HEART + ChatUtils.SECONDARY + "."));
         }
     }
 }

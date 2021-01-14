@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>me.joesvart</groupId>
-            <artifactId>combustion</artifactId>
+            <artifactId>lattelibs</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>me.joesvart</groupId>
             <artifactId>lattetab</artifactId>
-            <version>3.0</version>
+            <version>4.0</version>
             <scope>compile</scope>
         </dependency>
 

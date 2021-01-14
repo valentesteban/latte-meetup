@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.managers;
 
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.util.other.ItemBuilder;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -20,16 +20,16 @@ public class KitManager {
     public void handleItems(Player player) {
         PlayerInventory inventory = player.getInventory();
 
-        inventory.setHelmet(new ItemBuilder(getRandomMaterial("helmet"))
+        inventory.setHelmet(new ItemCreator(getRandomMaterial("helmet"))
                 .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
 
-        inventory.setChestplate(new ItemBuilder(getRandomMaterial("chestplate"))
+        inventory.setChestplate(new ItemCreator(getRandomMaterial("chestplate"))
                 .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
 
-        inventory.setLeggings(new ItemBuilder(getRandomMaterial("leggings"))
+        inventory.setLeggings(new ItemCreator(getRandomMaterial("leggings"))
                 .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
 
-        inventory.setBoots(new ItemBuilder(getRandomMaterial("boots"))
+        inventory.setBoots(new ItemCreator(getRandomMaterial("boots"))
                 .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
 
         boolean hasAnythingDiamond = false;
@@ -42,10 +42,10 @@ public class KitManager {
         }
 
         if(!hasAnythingDiamond) {
-            inventory.setChestplate(new ItemBuilder(getRandomMaterial("chestplate"))
+            inventory.setChestplate(new ItemCreator(getRandomMaterial("chestplate"))
                     .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
 
-            inventory.setLeggings(new ItemBuilder(getRandomMaterial("leggings"))
+            inventory.setLeggings(new ItemCreator(getRandomMaterial("leggings"))
                     .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
         } else {
             boolean hasEverythingDiamond = false;
@@ -58,10 +58,10 @@ public class KitManager {
             }
 
             if(hasEverythingDiamond) {
-                inventory.setHelmet(new ItemBuilder(Material.IRON_HELMET)
+                inventory.setHelmet(new ItemCreator(Material.IRON_HELMET)
                         .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
 
-                inventory.setBoots(new ItemBuilder(Material.IRON_BOOTS)
+                inventory.setBoots(new ItemCreator(Material.IRON_BOOTS)
                         .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, getLevel()).build());
             }
         }

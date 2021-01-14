@@ -1,11 +1,11 @@
 package me.joesvart.lattemeetup.tasks;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.util.other.BungeeUtil;
-import me.joesvart.lattemeetup.util.chat.CC;
 import me.joesvart.lattemeetup.util.chat.Msg;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -52,7 +52,7 @@ public class EndTask extends BukkitRunnable {
         }
 
         if(Arrays.asList(15, 10, 5, 4, 3, 2, 1).contains(data.getEndTime())) {
-            Msg.sendMessage(CC.SECONDARY + "The game ends in " + CC.PRIMARY + data.getEndTime() + CC.SECONDARY + " second" + (data.getEndTime() > 1 ? "s" : "") + ".");
+            Msg.sendMessage(ChatUtils.SECONDARY + "The game ends in " + ChatUtils.PRIMARY + data.getEndTime() + ChatUtils.SECONDARY + " second" + (data.getEndTime() > 1 ? "s" : "") + ".");
             Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1F, 1F));
         }
     }

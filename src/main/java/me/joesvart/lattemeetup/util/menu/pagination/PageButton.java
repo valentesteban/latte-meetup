@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup.util.menu.pagination;
 
 import lombok.AllArgsConstructor;
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.util.menu.Button;
-import me.joesvart.lattemeetup.util.other.ItemBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class PageButton extends Button {
     public ItemStack getButtonItem(Player player) {
         if (this.mod > 0) {
             if (hasNext(player)) {
-                return new ItemBuilder(Material.REDSTONE_TORCH_ON)
+                return new ItemCreator(Material.REDSTONE_TORCH_ON)
                     .name(ChatColor.GREEN + "Next Page")
                     .lore(Arrays.asList(
                         ChatColor.YELLOW + "Click here to jump",
@@ -29,7 +29,7 @@ public class PageButton extends Button {
                     ))
                     .build();
             } else {
-                return new ItemBuilder(Material.LEVER)
+                return new ItemCreator(Material.LEVER)
                     .name(ChatColor.GRAY + "Next Page")
                     .lore(Arrays.asList(
                         ChatColor.YELLOW + "There is no available",
@@ -39,7 +39,7 @@ public class PageButton extends Button {
             }
         } else {
             if (hasPrevious(player)) {
-                return new ItemBuilder(Material.REDSTONE_TORCH_ON)
+                return new ItemCreator(Material.REDSTONE_TORCH_ON)
                     .name(ChatColor.GREEN + "Previous Page")
                     .lore(Arrays.asList(
                         ChatColor.YELLOW + "Click here to jump",
@@ -47,7 +47,7 @@ public class PageButton extends Button {
                     ))
                     .build();
             } else {
-                return new ItemBuilder(Material.LEVER)
+                return new ItemCreator(Material.LEVER)
                     .name(ChatColor.GRAY + "Previous Page")
                     .lore(Arrays.asList(
                         ChatColor.YELLOW + "There is no available",

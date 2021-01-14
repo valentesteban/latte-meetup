@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup;
 
 import lombok.Setter;
-import me.joesvart.combustion.Combustion;
-import me.joesvart.combustion.CombustionStyle;
+import me.joesvart.lattelibs.scoreboard.Board;
+import me.joesvart.lattelibs.scoreboard.BoardStyle;
 import me.joesvart.lattemeetup.commands.CommandsManager;
 import me.joesvart.lattemeetup.database.MeetupDatabase;
 import me.joesvart.lattemeetup.game.GameListener;
@@ -11,7 +11,6 @@ import me.joesvart.lattemeetup.border.BorderManager;
 import me.joesvart.lattemeetup.managers.KitManager;
 import me.joesvart.lattemeetup.listeners.LobbyListener;
 import me.joesvart.lattemeetup.listeners.PlayerListener;
-import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.providers.MeetupTab;
 import me.joesvart.lattemeetup.scenario.ScenarioManager;
 import me.joesvart.lattemeetup.managers.VoteManager;
@@ -113,10 +112,10 @@ public class LatteMeetup extends JavaPlugin {
     }
 
     private void registerBoard() {
-        /* Register the Scoreboard */ // Old API
-        Combustion combustion = new Combustion(this, new MeetupBoard());
-        combustion.setTicks(2);
-        combustion.setCombustionStyle(CombustionStyle.MODERN);
+        /* Register the Scoreboard */
+        Board board = new Board(this, new MeetupBoard());
+        board.setTicks(2);
+        board.setBoardStyle(BoardStyle.MODERN);
     }
 
     private void registerTab() {
@@ -128,7 +127,7 @@ public class LatteMeetup extends JavaPlugin {
         /* Setup the perfect world for the game */
         Bukkit.getWorlds().forEach(world -> world.getEntities().forEach(Entity::remove));
 
-        World uhc = Bukkit.getWorld("meetupworld");
+        World uhc = Bukkit.getWorld("meetup_world");
         uhc.setGameRuleValue("doMobSpawning", "false");
         uhc.setGameRuleValue("doDaylightCycle", "false");
         uhc.setGameRuleValue("naturalRegeneration", "false");

@@ -26,7 +26,7 @@ public class WorldGenTask extends BukkitRunnable {
 
     public WorldGenTask(GameManager gameManager) {
         // Fail-safe
-        this.deleteDirectory(new File("meetupworld"));
+        this.deleteDirectory(new File("meetup_world"));
 
         this.gameManager = gameManager;
 
@@ -48,7 +48,7 @@ public class WorldGenTask extends BukkitRunnable {
         // Just to avoid any weird bukkit race conditions
         this.isGenerating = true;
 
-        WorldCreator worldCreator = new WorldCreator("meetupworld");
+        WorldCreator worldCreator = new WorldCreator("meetup_world");
         worldCreator.generateStructures(false);
 
         // Another fail safe
@@ -58,7 +58,7 @@ public class WorldGenTask extends BukkitRunnable {
             Bukkit.getLogger().info("World NPE when trying to generate map.");
             Bukkit.getServer().unloadWorld(this.world, false);
 
-            this.deleteDirectory(new File("meetupworld"));
+            this.deleteDirectory(new File("meetup_world"));
 
             this.isGenerating = false;
             return;
@@ -98,7 +98,7 @@ public class WorldGenTask extends BukkitRunnable {
         // Actually got this far...we have a valid world, generate the rest
         if(flag) {
             Bukkit.getServer().unloadWorld(this.world, false);
-            this.deleteDirectory(new File("meetupworld"));
+            this.deleteDirectory(new File("meetup_world"));
             this.isGenerating = false;
             return;
         } else {
@@ -107,7 +107,7 @@ public class WorldGenTask extends BukkitRunnable {
         }
 
         // Create Lock
-        File lock = new File("meetupworld", "gen.lock");
+        File lock = new File("meetup_world", "gen.lock");
         try {
             lock.createNewFile();
         } catch (IOException e) {
@@ -118,7 +118,7 @@ public class WorldGenTask extends BukkitRunnable {
 
         gameManager.handleSetWhitelistedBlocks();
         gameManager.handleLoadChunks();
-        new Border(Bukkit.getWorld("meetupworld"), 100);
+        new Border(Bukkit.getWorld("meetup_world"), 100);
         LatteMeetup.getInstance().setWorldProperties();
     }
 

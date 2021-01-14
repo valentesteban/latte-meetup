@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.scenario.types;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.util.chat.CC;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import me.joesvart.lattemeetup.scenario.Scenario;
 import me.joesvart.lattemeetup.util.chat.Msg;
@@ -82,7 +82,7 @@ public class TimeBombScenario extends Scenario {
                         where.getWorld().spigot().strikeLightning(where, true);
                         where.getWorld().createExplosion(where, 8f);
 
-                        Msg.sendMessage(CC.DARK_GRAY + "[" + CC.B_PRIMARY + "Time Bomb" + CC.DARK_GRAY + "] " + CC.SECONDARY + ChatColor.stripColor(entity.getName()) + "'s corpse has exploded.");
+                        Msg.sendMessage(ChatUtils.DARK_GRAY + "[" + ChatUtils.B_PRIMARY + "Time Bomb" + ChatUtils.DARK_GRAY + "] " + ChatUtils.SECONDARY + ChatColor.stripColor(entity.getName()) + "'s corpse has exploded.");
                     }
                 }
             }.runTaskTimer(LatteMeetup.getInstance(), 0L, 20L);

@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup.util.menu.pagination;
 
 import lombok.AllArgsConstructor;
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.util.menu.Button;
-import me.joesvart.lattemeetup.util.other.ItemBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,7 +18,7 @@ public class PageInfoButton extends Button {
     public ItemStack getButtonItem(Player player) {
         int pages = menu.getPages(player);
 
-        return new ItemBuilder(Material.PAPER)
+        return new ItemCreator(Material.PAPER)
             .name(ChatColor.GOLD + "Page Info")
             .lore(
                 ChatColor.YELLOW + "You are viewing page #" + menu.getPage() + ".",

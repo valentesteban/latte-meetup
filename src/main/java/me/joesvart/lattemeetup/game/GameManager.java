@@ -1,5 +1,7 @@
 package me.joesvart.lattemeetup.game;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattelibs.chat.Clickable;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
@@ -9,9 +11,6 @@ import me.joesvart.lattemeetup.tasks.BorderTask;
 import me.joesvart.lattemeetup.tasks.StartingTask;
 import me.joesvart.lattemeetup.tasks.WorldGenTask;
 import lombok.Getter;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.chat.Clickable;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
 import me.joesvart.lattemeetup.util.chat.Msg;
 import me.joesvart.lattemeetup.util.other.*;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +18,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +47,9 @@ public class GameManager {
 
         /* Game successfully started message */
         Msg.sendMessage("");
-        Msg.sendMessage(CC.PRIMARY + scenario.getName() + CC.SECONDARY + " has been voted for this game's scenario. " + CC.GRAY + "(" + plugin.getVoteManager().getVotes().get(scenario) + ")");
+        Msg.sendMessage(ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + " has been voted for this game's scenario. " + ChatUtils.GRAY + "(" + plugin.getVoteManager().getVotes().get(scenario) + ")");
         Msg.sendMessage("");
-        Msg.sendMessage(CC.BD_RED + "This is a solo game. Any form of teaming is not allowed and is punishable at staff's discretion.");
+        Msg.sendMessage(ChatUtils.BD_RED + "This is a solo game. Any form of teaming is not allowed and is punishable at staff's discretion.");
         Msg.sendMessage("");
 
         Bukkit.getOnlinePlayers().forEach(player -> {
@@ -61,14 +59,14 @@ public class GameManager {
             player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1F, 1F);
 
             /* Send a title saying the game has started */
-            player.sendTitle(CC.GREEN + CC.B + "BEGUN", CC.YELLOW + "Good luck!");
+            player.sendTitle(ChatUtils.GREEN + ChatUtils.B + "BEGUN", ChatUtils.YELLOW + "Good luck!");
         });
 
         /* Game error message */
         if (Bukkit.getOnlinePlayers().size() <= 1) {
-            Bukkit.broadcastMessage(CustomColor.translate(""));
-            Bukkit.broadcastMessage(CustomColor.translate("&8[&4Error&8] &7The game cannot continue as there are not enough players to play!"));
-            Bukkit.broadcastMessage(CustomColor.translate(""));
+            Bukkit.broadcastMessage(ChatUtils.translate(""));
+            Bukkit.broadcastMessage(ChatUtils.translate("&8[&4Error&8] &7The game cannot continue as there are not enough players to play!"));
+            Bukkit.broadcastMessage(ChatUtils.translate(""));
 
             this.plugin.getGameManager().handleCheckWinners();
         }
@@ -106,7 +104,7 @@ public class GameManager {
 
         /* Game successfully ended message */
         Msg.sendMessage("&7&m" + StringUtils.repeat('-', 45));
-        Msg.sendMessage(CC.D_GREEN + CC.B + "Post-Game Results " + CC.GRAY + '▏' + CC.RESET + " Click names to view inventories");
+        Msg.sendMessage(ChatUtils.D_GREEN + ChatUtils.B + "Post-Game Results " + ChatUtils.GRAY + '▏' + ChatUtils.RESET + " Click names to view inventories");
         Msg.sendMessage("");
 
         GameData data = GameManager.getData();
@@ -116,10 +114,10 @@ public class GameManager {
         data.setWinner(winner.getName());
 
 
-        Clickable clickable = new Clickable(CC.SECONDARY + "Winner: ");
-        clickable.add(CC.PRIMARY + data.getWinner(), CC.GREEN + "View inventory.", "/uinv " + data.getWinner());
+        Clickable clickable = new Clickable(ChatUtils.SECONDARY + "Winner: ");
+        clickable.add(ChatUtils.PRIMARY + data.getWinner(), ChatUtils.GREEN + "View inventory.", "/uinv " + data.getWinner());
         Bukkit.getOnlinePlayers().forEach(o -> clickable.sendToPlayer(o));
-        Msg.sendMessage(CC.SECONDARY + "Kills: " + CC.PRIMARY + winner.getGameKills() + CC.GRAY + " - " + CC.SECONDARY + "Total Wins: " + CC.PRIMARY + winner.getWins());
+        Msg.sendMessage(ChatUtils.SECONDARY + "Kills: " + ChatUtils.PRIMARY + winner.getGameKills() + ChatUtils.GRAY + " - " + ChatUtils.SECONDARY + "Total Wins: " + ChatUtils.PRIMARY + winner.getWins());
         Msg.sendMessage("&7&m" + StringUtils.repeat('-', 45));
         data.setGameState(GameState.WINNER);
 
@@ -160,7 +158,7 @@ public class GameManager {
         Bukkit.getScheduler().runTaskLater(LatteMeetup.getInstance(), () -> {
             for(int x = -110; x < 110; x++) {
                 for(int z = -110; z < 110; z++) {
-                    Location location = new Location(Bukkit.getWorld("meetupworld"), x, 60, z);
+                    Location location = new Location(Bukkit.getWorld("meetup_world"), x, 60, z);
 
                     if(!location.getChunk().isLoaded()) {
                         location.getWorld().loadChunk(x, z);

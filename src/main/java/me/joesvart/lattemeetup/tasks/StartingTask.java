@@ -1,9 +1,9 @@
 package me.joesvart.lattemeetup.tasks;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
-import me.joesvart.lattemeetup.util.chat.CC;
 import me.joesvart.lattemeetup.util.chat.Msg;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -34,7 +34,7 @@ public class StartingTask extends BukkitRunnable {
         }
 
         if(Arrays.asList(15, 10, 5, 4, 3, 2, 1).contains(data.getStartingTime())) {
-            Msg.sendMessage(CC.SECONDARY + "The game starts in " + CC.PRIMARY + data.getStartingTime() + CC.SECONDARY + " second" + (data.getStartingTime() > 1 ? "s" : "") + ".", Sound.ORB_PICKUP);
+            Msg.sendMessage(ChatUtils.SECONDARY + "The game starts in " + ChatUtils.PRIMARY + data.getStartingTime() + ChatUtils.SECONDARY + " second" + (data.getStartingTime() > 1 ? "s" : "") + ".", Sound.ORB_PICKUP);
         }
     }
 }

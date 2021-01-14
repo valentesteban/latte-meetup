@@ -1,9 +1,9 @@
 package me.joesvart.lattemeetup.util.menu.button;
 
 import lombok.AllArgsConstructor;
+import me.joesvart.lattelibs.menu.callback.TypeCallback;
 import me.joesvart.lattemeetup.util.menu.Button;
 import me.joesvart.lattemeetup.util.menu.Menu;
-import me.joesvart.lattemeetup.util.callback.TypeCallback;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

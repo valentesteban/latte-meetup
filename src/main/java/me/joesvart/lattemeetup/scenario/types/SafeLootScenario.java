@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.scenario.types;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.scenario.Scenario;
-import me.joesvart.lattemeetup.util.chat.CC;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -29,7 +29,7 @@ public class SafeLootScenario extends Scenario {
 
             if(chest.hasMetadata("SafeLoot") && !chest.getMetadata("SafeLoot").get(0).asString().equals(event.getPlayer().getName())) {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(CC.RED + "That chest is protected.");
+                event.getPlayer().sendMessage(ChatUtils.RED + "That chest is protected.");
             }
         }
     }
@@ -47,7 +47,7 @@ public class SafeLootScenario extends Scenario {
 
             if(chest.hasMetadata("SafeLoot") && !chest.getMetadata("SafeLoot").get(0).asString().equals(event.getPlayer().getName())) {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(CC.RED + "That chest is protected.");
+                event.getPlayer().sendMessage(ChatUtils.RED + "That chest is protected.");
             }
         }
     }

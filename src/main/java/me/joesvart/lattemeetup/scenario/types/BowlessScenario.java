@@ -1,6 +1,6 @@
 package me.joesvart.lattemeetup.scenario.types;
 
-import me.joesvart.lattemeetup.util.chat.CustomColor;
+import me.joesvart.lattelibs.chat.ChatUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -21,7 +21,7 @@ public class BowlessScenario extends Scenario {
     public void onCraftItem(CraftItemEvent event) {
         if(event.getRecipe().getResult().getType() == Material.BOW) {
             event.getInventory().setResult(new ItemStack(Material.AIR));
-            event.getView().getPlayer().sendMessage(CustomColor.translate("&cYou cannot use bows while &eBowless&c scenario is active."));
+            event.getView().getPlayer().sendMessage(ChatUtils.translate("&cYou cannot use bows while &eBowless&c scenario is active."));
             event.setCancelled(true);
         }
     }
@@ -31,7 +31,7 @@ public class BowlessScenario extends Scenario {
         if(event.getItem() != null && event.getItem().getType() == Material.BOW) {
             event.getPlayer().setItemInHand(null);
             event.getPlayer().updateInventory();
-            event.getPlayer().sendMessage(CustomColor.translate("&cYou cannot use bows while &eBowless&c scenario is active."));
+            event.getPlayer().sendMessage(ChatUtils.translate("&cYou cannot use bows while &eBowless&c scenario is active."));
         }
     }
 }

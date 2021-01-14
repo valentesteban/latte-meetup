@@ -1,11 +1,11 @@
 package me.joesvart.lattemeetup.managers;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
-import me.joesvart.lattemeetup.util.chat.StringUtil;
+import me.joesvart.lattemeetup.util.chat.StringUtils;
 import me.joesvart.lattemeetup.util.other.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -39,11 +39,11 @@ public class SpectatorManager {
 
         Bukkit.getScheduler().runTask(LatteMeetup.getInstance(), () -> Bukkit.getOnlinePlayers().forEach(online -> online.hidePlayer(player)));
         player.sendMessage("");
-        player.sendMessage(CC.GRAY + "You are now in spectator mode.");
+        player.sendMessage(ChatUtils.GRAY + "You are now in spectator mode.");
         player.setFlySpeed(0.2F);
 
         /* Send a title saying you has been killd, and now you are a spectator. */
-        player.sendTitle(CC.RED + CC.B + "DEAD", CC.YELLOW + "You are now a spectator!");
+        player.sendTitle(ChatUtils.RED + ChatUtils.B + "DEAD", ChatUtils.YELLOW + "You are now a spectator!");
 
         PlayerData data = PlayerData.getByName(player.getName());
         data.setPlayerState(PlayerState.SPECTATING);
@@ -74,7 +74,7 @@ public class SpectatorManager {
 
     public void handleRandomTeleport(Player player) {
         if(PlayerData.getAlivePlayers() == 0) {
-            player.sendMessage(CustomColor.translate("&cThere are currently no alive players."));
+            player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
             return;
         }
 
@@ -83,16 +83,16 @@ public class SpectatorManager {
 
         if(target != null) {
             player.teleport(target);
-            player.sendMessage(CC.GRAY + "Teleporting you to " + CC.PRIMARY + target.getDisplayName() + CC.GRAY + ".");
+            player.sendMessage(ChatUtils.GRAY + "Teleporting you to " + ChatUtils.PRIMARY + target.getDisplayName() + ChatUtils.GRAY + ".");
         }
     }
 
     public Inventory getInventory(int page) {
         int max = (int) Math.ceil(PlayerData.getAlivePlayers() / 18.0);
 
-        Inventory inventory = Bukkit.createInventory(null, 27, CustomColor.translate("Player Remaining ┃ " + page + "/" + (max == 0 ? 1 : max)));
-        inventory.setItem(0, new ItemBuilder(Material.ARROW).name(CC.GRAY + "Previous Page").build());
-        inventory.setItem(8, new ItemBuilder(Material.ARROW).name(CC.GREEN + "Next Page").build());
+        Inventory inventory = Bukkit.createInventory(null, 27, ChatUtils.translate("Player Remaining ┃ " + page + "/" + (max == 0 ? 1 : max)));
+        inventory.setItem(0, new ItemCreator(Material.ARROW).name(ChatUtils.GRAY + "Previous Page").build());
+        inventory.setItem(8, new ItemCreator(Material.ARROW).name(ChatUtils.GREEN + "Next Page").build());
 
         int minIndex = (int) ((double) (page - 1) * 18);
         int maxIndex = (int) ((double) (page) * 18);
@@ -107,11 +107,11 @@ public class SpectatorManager {
             if(number >= minIndex && number < maxIndex) {
                 number -= (int) ((double) (18) * (page - 1)) - 9;
 
-                inventory.setItem(number, new ItemBuilder(Material.SKULL_ITEM)
-                        .name(CC.PRIMARY + data.getName())
-                        .lore(CC.GRAY + CC.STRIKE_THROUGH + "-----------------------------")
-                        .lore(CC.GREEN + "Click to teleport to " + CC.PRIMARY + data.getName())
-                        .lore(CC.GRAY + CC.STRIKE_THROUGH + "-----------------------------").build());
+                inventory.setItem(number, new ItemCreator(Material.SKULL_ITEM)
+                        .name(ChatUtils.PRIMARY + data.getName())
+                        .lore(ChatUtils.GRAY + ChatUtils.STRIKE_THROUGH + "-----------------------------")
+                        .lore(ChatUtils.GREEN + "Click to teleport to " + ChatUtils.PRIMARY + data.getName())
+                        .lore(ChatUtils.GRAY + ChatUtils.STRIKE_THROUGH + "-----------------------------").build());
             }
         });
 
@@ -125,11 +125,11 @@ public class SpectatorManager {
         ItemStack[] armor = player.getInventory().getArmorContents();
 
         double health = player.getHealth();
-        double food = (double) player.getFoodLevel();
+        double food = player.getFoodLevel();
 
         List<String> potionEffectStrings = new ArrayList<>();
 
-        player.getActivePotionEffects().forEach(potionEffect -> potionEffectStrings.add(CC.SECONDARY + StringUtil.toNiceString(potionEffect.getType().getName().toLowerCase()) + " " + MathUtil.convertToRomanNumeral(potionEffect.getAmplifier() + 1) + CC.PRIMARY + " (" + MathUtil.convertTicksToMinutes(potionEffect.getDuration()) + ")"));
+        player.getActivePotionEffects().forEach(potionEffect -> potionEffectStrings.add(ChatUtils.SECONDARY + StringUtils.toNiceString(potionEffect.getType().getName().toLowerCase()) + " " + MathUtil.convertToRomanNumeral(potionEffect.getAmplifier() + 1) + ChatUtils.PRIMARY + " (" + MathUtil.convertTicksToMinutes(potionEffect.getDuration()) + ")"));
 
         for(int i = 0; i < 9; i++) {
             inventory.setItem(i + 27, contents[i]);
@@ -140,15 +140,15 @@ public class SpectatorManager {
 
         int gapples = (int) Arrays.stream(contents).filter(Objects::nonNull).filter(d -> d.getType() == Material.GOLDEN_APPLE).mapToInt(ItemStack::getAmount).count();
 
-        inventory.setItem(47, new ItemBuilder(Material.GOLDEN_APPLE).amount(gapples).name(CC.PRIMARY + "Golden Apples: " + CC.SECONDARY + gapples).build());
-        inventory.setItem(48, ItemUtil.createItem(Material.SKULL_ITEM, CC.PRIMARY + "Hearts: " + CC.SECONDARY + MathUtil.roundToHalves(health / 2.0D) + " / 10 ❤", (int) Math.round(health / 2.0D)));
-        inventory.setItem(49, ItemUtil.createItem(Material.COOKED_BEEF, CC.PRIMARY + "Hunger: " + CC.SECONDARY + MathUtil.roundToHalves(food / 2.0D) + " / 10 ❤", (int) Math.round(food / 2.0D)));
-        inventory.setItem(50, ItemUtil.reloreItem(ItemUtil.createItem(Material.BREWING_STAND_ITEM, CC.PRIMARY + "Potion Effects", potionEffectStrings.size()), potionEffectStrings.toArray(new String[]{})));
+        inventory.setItem(47, new ItemCreator(Material.GOLDEN_APPLE).amount(gapples).name(ChatUtils.PRIMARY + "Golden Apples: " + ChatUtils.SECONDARY + gapples).build());
+        inventory.setItem(48, ItemUtil.createItem(Material.SKULL_ITEM, ChatUtils.PRIMARY + "Hearts: " + ChatUtils.SECONDARY + MathUtil.roundToHalves(health / 2.0D) + " / 10 ❤", (int) Math.round(health / 2.0D)));
+        inventory.setItem(49, ItemUtil.createItem(Material.COOKED_BEEF, ChatUtils.PRIMARY + "Hunger: " + ChatUtils.SECONDARY + MathUtil.roundToHalves(food / 2.0D) + " / 10 ❤", (int) Math.round(food / 2.0D)));
+        inventory.setItem(50, ItemUtil.reloreItem(ItemUtil.createItem(Material.BREWING_STAND_ITEM, ChatUtils.PRIMARY + "Potion Effects", potionEffectStrings.size()), potionEffectStrings.toArray(new String[]{})));
 
         PlayerData data = PlayerData.getByName(player.getName());
 
-        inventory.setItem(45, new ItemBuilder(Material.PAPER).name(CC.PRIMARY + "Close Preview").build());
-        inventory.setItem(53, new ItemBuilder(Material.PAPER).name(CC.PRIMARY + "Close Preview").build());
+        inventory.setItem(45, new ItemCreator(Material.PAPER).name(ChatUtils.PRIMARY + "Close Preview").build());
+        inventory.setItem(53, new ItemCreator(Material.PAPER).name(ChatUtils.PRIMARY + "Close Preview").build());
 
         for(int i = 36; i < 40; i++) {
             inventory.setItem(i, armor[39 - i]);

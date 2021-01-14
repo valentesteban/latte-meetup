@@ -1,11 +1,11 @@
 package me.joesvart.lattemeetup.tasks;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.border.Border;
 import me.joesvart.lattemeetup.player.PlayerData;
-import me.joesvart.lattemeetup.util.chat.CC;
 import me.joesvart.lattemeetup.util.chat.Msg;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -33,10 +33,10 @@ public class BorderTask extends BukkitRunnable {
                 data.setBorderTime(120);
             }
 
-            new Border(Bukkit.getWorld("meetupworld"), data.getNextBorder());
-            Msg.sendMessage(CC.SECONDARY + "The border has shrunk to " + CC.PRIMARY + data.getBorder() + CC.SECONDARY + ".", Sound.CLICK);
+            new Border(Bukkit.getWorld("meetup_world"), data.getNextBorder());
+            Msg.sendMessage(ChatUtils.SECONDARY + "The border has shrunk to " + ChatUtils.PRIMARY + data.getBorder() + ChatUtils.SECONDARY + ".", Sound.CLICK);
         } else if(Arrays.asList(120, 60, 45, 30, 15, 10, 5, 4, 3, 2, 1).contains(data.getBorderTime())) {
-            Msg.sendMessage(CC.SECONDARY + "The border will shrink to " + CC.PRIMARY + data.getNextBorder() + CC.SECONDARY + " in " + CC.PRIMARY + (data.getBorderTime() < 60 ? data.getBorderTime() + CC.SECONDARY + (data.getBorderTime() == 1 ? " second" : " seconds") : data.getBorderTime() / 60 + CC.SECONDARY + ((data.getBorderTime() / 60) == 1 ? " minute" : " minutes")) + CC.SECONDARY + ".", Sound.ORB_PICKUP);
+            Msg.sendMessage(ChatUtils.SECONDARY + "The border will shrink to " + ChatUtils.PRIMARY + data.getNextBorder() + ChatUtils.SECONDARY + " in " + ChatUtils.PRIMARY + (data.getBorderTime() < 60 ? data.getBorderTime() + ChatUtils.SECONDARY + (data.getBorderTime() == 1 ? " second" : " seconds") : data.getBorderTime() / 60 + ChatUtils.SECONDARY + ((data.getBorderTime() / 60) == 1 ? " minute" : " minutes")) + ChatUtils.SECONDARY + ".", Sound.ORB_PICKUP);
         }
     }
 }

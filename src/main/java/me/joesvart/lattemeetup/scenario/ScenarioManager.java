@@ -1,11 +1,11 @@
 package me.joesvart.lattemeetup.scenario;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.other.ItemBuilder;
-import me.joesvart.lattemeetup.util.chat.StringUtil;
 import lombok.Getter;
 import me.joesvart.lattemeetup.scenario.types.*;
+import me.joesvart.lattemeetup.util.chat.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
@@ -36,16 +36,16 @@ public class ScenarioManager {
 	public static ItemStack getItem(Scenario scenario) {
 		List<String> lore = new ArrayList<>();
 		lore.add("");
-		lore.addAll(Arrays.asList(StringUtil.niceLore(scenario.getDescription(), ChatColor.GRAY)));
+		lore.addAll(Arrays.asList(StringUtils.niceLore(scenario.getDescription(), ChatColor.GRAY)));
 		lore.add("");
-		lore.add(CC.PRIMARY + "Votes: " + CC.SECONDARY + LatteMeetup.getInstance().getVoteManager().getVotes().get(scenario));
+		lore.add(ChatUtils.PRIMARY + "Votes: " + ChatUtils.SECONDARY + LatteMeetup.getInstance().getVoteManager().getVotes().get(scenario));
 		lore.add("");
-		lore.add(CC.GRAY + CC.I + "Click to vote...");
+		lore.add(ChatUtils.GRAY + ChatUtils.I + "Click to vote...");
 
-		return new ItemBuilder(scenario.getIcon().getType())
+		return new ItemCreator(scenario.getIcon().getType())
 				.durability(scenario.getIcon().getDurability())
 				.amount(scenario.getIcon().getAmount())
-				.name(CC.GREEN + scenario.getName())
+				.name(ChatUtils.GREEN + scenario.getName())
 				.lore(lore).build();
 	}
 

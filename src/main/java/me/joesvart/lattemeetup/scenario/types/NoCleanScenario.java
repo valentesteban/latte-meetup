@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.scenario.types;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,7 +27,7 @@ public class NoCleanScenario extends Scenario {
 
         if(player != null) {
             PlayerData.getByName(player.getName()).applyNoClean();
-            player.sendMessage(CustomColor.translate("&a[No Clean] You have a 20 second invincibility timer."));
+            player.sendMessage(ChatUtils.translate("&a[No Clean] You have a 20 second invincibility timer."));
         }
     }
 
@@ -40,7 +40,7 @@ public class NoCleanScenario extends Scenario {
             PlayerData playerData = PlayerData.getByName(player.getName());
 
             if(playerData.isNoCleanActive()) {
-                damager.sendMessage(CustomColor.translate("&c[No Clean] " + player.getName() + " has No Clean invincibility timer."));
+                damager.sendMessage(ChatUtils.translate("&c[No Clean] " + player.getName() + " has No Clean invincibility timer."));
                 event.setCancelled(true);
                 return;
             }
@@ -49,7 +49,7 @@ public class NoCleanScenario extends Scenario {
 
             if(damagerData.isNoCleanActive()) {
                 damagerData.removeNoCleanCooldown();
-                damager.sendMessage(CustomColor.translate("&c[No Clean] Your No Clean invincibility timer has been removed."));
+                damager.sendMessage(ChatUtils.translate("&c[No Clean] Your No Clean invincibility timer has been removed."));
             }
         }
     }

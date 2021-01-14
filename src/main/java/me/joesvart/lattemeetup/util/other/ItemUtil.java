@@ -1,10 +1,10 @@
 package me.joesvart.lattemeetup.util.other;
 
 import lombok.RequiredArgsConstructor;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.util.chat.RomanNumerals;
 import me.joesvart.lattemeetup.util.chat.StringUtil;
+import me.joesvart.lattemeetup.util.chat.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -43,12 +43,12 @@ public final class ItemUtil {
 		PotionMeta meta = (PotionMeta) itemStack.getItemMeta();
 
 		if (name != null) {
-			meta.setDisplayName(CustomColor.translate(name));
+			meta.setDisplayName(ChatUtils.translate(name));
 		}
 
 		meta.setLore(Arrays.asList(
-				"", CC.GRAY + StringUtil.toNiceString(type.name()) + " " + RomanNumerals.toRoman(level) + " Potion",
-				CC.GRAY + "    Duration: " + TimeUtil.millisToRoundedTime(duration * 1000L)));
+				"", ChatUtils.GRAY + StringUtils.toNiceString(type.name()) + " " + RomanNumerals.toRoman(level) + " Potion",
+			ChatUtils.GRAY + "    Duration: " + TimeUtil.millisToRoundedTime(duration * 1000L)));
 
 		meta.addCustomEffect(new PotionEffect(type.getEffectType(), duration * 20, level - 1), false);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS);
@@ -70,7 +70,7 @@ public final class ItemUtil {
 		ItemStack item = new ItemStack(material);
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName(CustomColor.translate(name));
+		meta.setDisplayName(ChatUtils.translate(name));
 		item.setItemMeta(meta);
 
 		return item;
@@ -80,7 +80,7 @@ public final class ItemUtil {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName(CustomColor.translate(name));
+		meta.setDisplayName(ChatUtils.translate(name));
 		item.setItemMeta(meta);
 
 		return item;
@@ -90,7 +90,7 @@ public final class ItemUtil {
 		ItemStack item = new ItemStack(material, amount, damage);
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName(CustomColor.translate(name));
+		meta.setDisplayName(ChatUtils.translate(name));
 		item.setItemMeta(meta);
 
 		return item;
@@ -114,7 +114,7 @@ public final class ItemUtil {
 	public static ItemStack renameItem(ItemStack item, String name) {
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName(CustomColor.translate(name));
+		meta.setDisplayName(ChatUtils.translate(name));
 		item.setItemMeta(meta);
 
 		return item;
@@ -135,12 +135,12 @@ public final class ItemUtil {
 		switch (type) {
 			case APPEND:
 				lore.addAll(Arrays.asList(lores));
-				meta.setLore(CustomColor.translate(lore));
+				meta.setLore(ChatUtils.translate(lore));
 				break;
 			case PREPEND:
 				List<String> nLore = new LinkedList<>(Arrays.asList(lores));
-				nLore.addAll(CustomColor.translate(lore));
-				meta.setLore(CustomColor.translate(nLore));
+				nLore.addAll(ChatUtils.translate(lore));
+				meta.setLore(ChatUtils.translate(nLore));
 				break;
 			case OVERWRITE:
 				meta.setLore(Arrays.asList(lores));

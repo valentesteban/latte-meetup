@@ -1,9 +1,9 @@
 package me.joesvart.lattemeetup.leaderboards.buttons;
 
 import lombok.AllArgsConstructor;
-import me.joesvart.lattemeetup.util.chat.CC;
+import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.util.menu.Button;
-import me.joesvart.lattemeetup.util.other.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -15,8 +15,8 @@ public class BackButton extends Button {
 
     @Override
     public ItemStack getButtonItem(Player player) {
-        return new ItemBuilder(Material.BARRIER)
-            .name(CC.translate("&cClick to close the menu."))
+        return new ItemCreator(Material.BARRIER)
+            .name(ChatUtils.translate("&cClick to close the menu."))
             .build();
     }
 

@@ -2,8 +2,8 @@ package me.joesvart.lattemeetup.util.menu;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.util.chat.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -55,7 +55,7 @@ public abstract class Menu {
         Inventory inventory = null;
         int size = this.getSize() == -1 ? this.size(this.buttons) : this.getSize();
         boolean update = false;
-        String title = CC.translate(this.getTitle(player));
+        String title = ChatUtils.translate(this.getTitle(player));
 
         if (title.length() > 32) {
             title = title.substring(0, 32);

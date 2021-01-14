@@ -1,6 +1,6 @@
 package me.joesvart.lattemeetup.managers;
 
-import me.joesvart.lattemeetup.util.chat.CC;
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.scenario.Scenario;
@@ -38,7 +38,7 @@ public class VoteManager {
     public void handleAddVote(Player player, Scenario scenario) {
         votes.put(scenario, votes.get(scenario) + 1);
         PlayerData.getByName(player.getName()).setLastVoted(scenario.getName());
-        player.sendMessage(CC.SECONDARY + "You have casted your vote for " + CC.PRIMARY + scenario.getName() + CC.SECONDARY + ".");
+        player.sendMessage(ChatUtils.SECONDARY + "You have casted your vote for " + ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + ".");
         MeetupUtils.handleSound(player, Sound.NOTE_PIANO);
     }
 
@@ -46,7 +46,7 @@ public class VoteManager {
         PlayerData data = PlayerData.getByName(player.getName());
 
         if(data.getLastVoted().equals(newVote.getName())) {
-            player.sendMessage(CC.RED + "You have already voted for " + newVote.getName() + ".");
+            player.sendMessage(ChatUtils.RED + "You have already voted for " + newVote.getName() + ".");
             MeetupUtils.handleSound(player, Sound.DIG_GRASS);
             return;
         }

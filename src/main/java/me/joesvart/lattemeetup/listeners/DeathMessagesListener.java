@@ -1,8 +1,7 @@
 package me.joesvart.lattemeetup.listeners;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
-import me.joesvart.lattemeetup.util.chat.CC;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
 import net.minecraft.server.v1_8_R3.EntityLiving;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -42,7 +41,7 @@ public class DeathMessagesListener implements Listener {
 
                 if(event.getEntity().getLastDamageCause().getCause().equals(DamageCause.PROJECTILE)) {
                     int distance = (int) Math.round(shooter.getLocation().distance(event.getEntity().getLocation()));
-                    handleMessage(message, event, shooter.getItemInHand() != null && !shooter.getItemInHand().getType().equals(Material.AIR) && shooter.getItemInHand().getType().equals(Material.BOW) ? CC.GRAY + " from " + CC.RED + distance + (distance == 1 ? " block" : " blocks") : "");
+                    handleMessage(message, event, shooter.getItemInHand() != null && !shooter.getItemInHand().getType().equals(Material.AIR) && shooter.getItemInHand().getType().equals(Material.BOW) ? ChatUtils.GRAY + " from " + ChatUtils.RED + distance + (distance == 1 ? " block" : " blocks") : "");
                     return;
                 }
             }
@@ -52,15 +51,15 @@ public class DeathMessagesListener implements Listener {
     }
 
     private String getDeathMessage(String input, Entity entity, Entity killer, String pColor, String kColor) {
-        String pCS = Objects.equals(pColor, CC.GREEN) ? CC.DARK_GREEN : CC.DARK_RED;
-        String kCS = Objects.equals(kColor, CC.GREEN) ? CC.DARK_GREEN : CC.DARK_RED;
+        String pCS = Objects.equals(pColor, ChatUtils.GREEN) ? ChatUtils.DARK_GREEN : ChatUtils.DARK_RED;
+        String kCS = Objects.equals(kColor, ChatUtils.GREEN) ? ChatUtils.DARK_GREEN : ChatUtils.DARK_RED;
 
         if(entity != null) {
-            input = input.replaceFirst("(?i)" + getEntityName(entity), pColor + getNiceDisplayName(entity, pCS) + CC.GRAY);
+            input = input.replaceFirst("(?i)" + getEntityName(entity), pColor + getNiceDisplayName(entity, pCS) + ChatUtils.GRAY);
         }
 
         if(killer != null && (entity == null || !killer.equals(entity))) {
-            input = input.replaceFirst("(?i)" + getEntityName(killer), kColor + getNiceDisplayName(killer, kCS) + CC.GRAY);
+            input = input.replaceFirst("(?i)" + getEntityName(killer), kColor + getNiceDisplayName(killer, kCS) + ChatUtils.GRAY);
         }
 
         return input;
@@ -87,10 +86,10 @@ public class DeathMessagesListener implements Listener {
 
     private void handleMessage(String message, PlayerDeathEvent event, String toAdd) {
         Bukkit.getOnlinePlayers().forEach(player -> {
-            String color1 = event.getEntity().getName().equals(player.getName()) ? CC.GREEN : CC.RED;
-            String color2 = ((CraftPlayer) event.getEntity()).getHandle().getLastDamager() != null ? ((CraftPlayer) event.getEntity()).getHandle().getLastDamager().getName().equals(player.getName()) ? CC.GREEN : CC.RED : CC.RED;
+            String color1 = event.getEntity().getName().equals(player.getName()) ? ChatUtils.GREEN : ChatUtils.RED;
+            String color2 = ((CraftPlayer) event.getEntity()).getHandle().getLastDamager() != null ? ((CraftPlayer) event.getEntity()).getHandle().getLastDamager().getName().equals(player.getName()) ? ChatUtils.GREEN : ChatUtils.RED : ChatUtils.RED;
 
-            player.sendMessage(getDeathMessage(message, event.getEntity(), getKiller(event), color1, color2) + CustomColor.translate(toAdd + CC.GRAY + "."));
+            player.sendMessage(getDeathMessage(message, event.getEntity(), getKiller(event), color1, color2) + ChatUtils.translate(toAdd + ChatUtils.GRAY + "."));
             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
         });
     }

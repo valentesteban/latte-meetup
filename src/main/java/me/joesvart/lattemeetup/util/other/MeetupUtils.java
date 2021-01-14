@@ -1,5 +1,6 @@
 package me.joesvart.lattemeetup.util.other;
 
+import me.joesvart.lattelibs.item.ItemCreator;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -24,7 +25,7 @@ public class MeetupUtils {
     }
 
     public static void deleteWorld() {
-        World world = Bukkit.getWorld("meetupworld");
+        World world = Bukkit.getWorld("meetup_world");
 
         if(world != null) {
             Bukkit.getServer().unloadWorld(world, false);
@@ -34,7 +35,7 @@ public class MeetupUtils {
     }
 
     public static ItemStack getGoldenHead() {
-        return new ItemBuilder(Material.GOLDEN_APPLE).durability(0).name("&6Golden Head").lore(
+        return new ItemCreator(Material.GOLDEN_APPLE).durability(0).name("&6Golden Head").lore(
                 Arrays.asList(
                         "&7Some say consuming the need of a",
                         "&7fallen foe strengthens the blood."
@@ -72,7 +73,7 @@ public class MeetupUtils {
         int x = r.nextInt(100 * 2) - 100;
         int z = r.nextInt(100 * 2) - 100;
 
-        return new Location(Bukkit.getWorld("meetupworld"), x, (Bukkit.getWorld("meetupworld").getHighestBlockYAt(x, z) + 1), z);
+        return new Location(Bukkit.getWorld("meetup_world"), x, (Bukkit.getWorld("meetup_world").getHighestBlockYAt(x, z) + 1), z);
     }
 
     public static String formatInt(int i) {

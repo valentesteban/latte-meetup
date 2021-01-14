@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup.scenario.types;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.scenario.Scenario;
-import me.joesvart.lattemeetup.util.chat.CC;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.Cancellable;
 import org.bukkit.Material;
@@ -59,11 +59,11 @@ public class DoNotDisturbScenario extends Scenario {
             damagerData.applyDisturb(player.getName());
             playerData.applyDisturb(damager.getName());
 
-            damager.sendMessage(CC.SECONDARY + "You are now linked to " + player.getDisplayName() + CC.SECONDARY + ".");
-            player.sendMessage(CC.SECONDARY + "You are now linked to " + damager.getDisplayName() + CC.SECONDARY  + ".");
+            damager.sendMessage(ChatUtils.SECONDARY + "You are now linked to " + player.getDisplayName() + ChatUtils.SECONDARY + ".");
+            player.sendMessage(ChatUtils.SECONDARY + "You are now linked to " + damager.getDisplayName() + ChatUtils.SECONDARY  + ".");
         } else if((damagerData.getDisturb() != null && !damagerData.getDisturb().equals(player.getName()) && damagerData.isDisturbActive()) || (playerData.getDisturb() != null && !playerData.getDisturb().equals(damager.getName()) && playerData.isDisturbActive())) {
             event.setCancelled(true);
-            damager.sendMessage(CC.RED + player.getName() + " is not linked to you.");
+            damager.sendMessage(ChatUtils.RED + player.getName() + " is not linked to you.");
         }
     }
 }

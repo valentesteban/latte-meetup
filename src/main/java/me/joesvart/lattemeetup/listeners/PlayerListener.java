@@ -1,5 +1,8 @@
 package me.joesvart.lattemeetup.listeners;
 
+import javafx.animation.Animation;
+import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattelibs.utils.AnimationUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.game.GameState;
@@ -43,7 +46,7 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
         if(!GameManager.getData().isGenerated()) {
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, CC.RED + "Please wait for map to generate!");
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatUtils.RED + "Please wait for map to generate!");
         }
     }
 
@@ -59,17 +62,17 @@ public class PlayerListener implements Listener {
         }
 
         if(!data.isLoaded()) {
-            player.kickPlayer(StringUtil.LOAD_ERROR);
+            player.kickPlayer(StringUtils.LOAD_ERROR);
         }
 
         /* Animation for the Links on the Tablist and the Scoreboard */
-        Animation animation = new Animation("Link", player.getUniqueId(), 40L);
+        AnimationUtils animation = new AnimationUtils("Link", player.getUniqueId(), 40L);
 
-        animation.getLines().add(CC.translate("&7&olatte.org"));
-        animation.getLines().add(CC.translate("&7&oww.latte.org"));
-        animation.getLines().add(CC.translate("&7&olatte.org/discord"));
-        animation.getLines().add(CC.translate("&7&ots.latte.org"));
-        animation.getLines().add(CC.translate("&7&o@LatteNET"));
+        animation.getLines().add(ChatUtils.translate("&7&olatte.org"));
+        animation.getLines().add(ChatUtils.translate("&7&oww.latte.org"));
+        animation.getLines().add(ChatUtils.translate("&7&olatte.org/discord"));
+        animation.getLines().add(ChatUtils.translate("&7&ots.latte.org"));
+        animation.getLines().add(ChatUtils.translate("&7&o@LatteNET"));
 
         switch (GameManager.getData().getGameState()) {
             case WINNER:
@@ -96,7 +99,7 @@ public class PlayerListener implements Listener {
                     player.teleport(MeetupUtils.getScatterLocation());
                 }
 
-                Msg.sendMessage(CC.PRIMARY + player.getName() + CC.SECONDARY + " has joined. " + CC.GRAY + "(" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")");
+                Msg.sendMessage(ChatUtils.PRIMARY + player.getName() + ChatUtils.SECONDARY + " has joined. " + ChatUtils.GRAY + "(" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")");
 
                 if(GameManager.getData().getGameState().equals(GameState.STARTING)) {
                     plugin.getKitManager().handleItems(player);
@@ -128,7 +131,7 @@ public class PlayerListener implements Listener {
             plugin.getGameManager().handleCheckWinners();
 
             /* If the player disconnect remove from the game and send this message */
-            Msg.sendMessage("&c" + player.getName() + CC.DARK_RED + "[" + playerData.getGameKills() + "] " + CC.GRAY + "has been disqualified for disconnecting.");
+            Msg.sendMessage("&c" + player.getName() + ChatUtils.DARK_RED + "[" + playerData.getGameKills() + "] " + ChatUtils.GRAY + "has been disqualified for disconnecting.");
 
             if(ScenarioManager.getByName("Time Bomb").isActive() && ScenarioManager.getByName("Safe Loot").isActive()) {
                 List<ItemStack> items = new ArrayList<>();
@@ -202,7 +205,7 @@ public class PlayerListener implements Listener {
                 switch (player.getItemInHand().getType()) {
                     case ITEM_FRAME:
                         if(PlayerData.getAlivePlayers() == 0) {
-                            player.sendMessage(CustomColor.translate("&cThere are currently no alive players."));
+                            player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
                             return;
                         }
 
@@ -210,7 +213,7 @@ public class PlayerListener implements Listener {
                         break;
                     case DIAMOND:
                         if(PlayerData.getAlivePlayers() == 0) {
-                            player.sendMessage(CustomColor.translate("&cThere are currently no alive players."));
+                            player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
                             return;
                         }
 
@@ -244,7 +247,7 @@ public class PlayerListener implements Listener {
     private String getSpectatorFormat(Player player, String message) {
         if(!player.hasPermission("lattemeetup.staff")) {
             if(PlayerData.getByName(player.getName()).isSpectator()) {
-                return CustomColor.translate("&7[Spectator] " + player.getName() + "&7: ") + message;
+                return ChatUtils.translate("&7[Spectator] " + player.getName() + "&7: ") + message;
             }
         }
         return null;
@@ -315,7 +318,7 @@ public class PlayerListener implements Listener {
         event.setCancelled(true);
         event.setResult(Event.Result.DENY);
 
-        player.sendMessage(CustomColor.translate("&cYou cannot craft items in UHC Meetup."));
+        player.sendMessage(ChatUtils.translate("&cYou cannot craft items in UHC Meetup."));
     }
 
     @EventHandler

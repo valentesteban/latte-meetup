@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.border;
 
+import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.game.GameState;
-import me.joesvart.lattemeetup.util.chat.CustomColor;
 import me.joesvart.lattespigot.LatteSpigot;
 import me.joesvart.lattespigot.handler.MovementHandler;
 import net.minecraft.server.v1_8_R3.PacketPlayInFlying;
@@ -25,7 +25,7 @@ public class BorderManager {
                 int size = GameManager.getData().getBorder();
                 World world = player.getWorld();
 
-                if(world.getName().equalsIgnoreCase("meetupworld")) {
+                if(world.getName().equalsIgnoreCase("meetup_world")) {
                     if(player.getLocation().getBlockX() > size) {
                         handleEffects(player);
                         player.teleport(new Location(world, size - 2, player.getLocation().getBlockY(), player.getLocation().getBlockZ()));
@@ -70,6 +70,6 @@ public class BorderManager {
     private void handleEffects(Player player) {
         player.getWorld().playEffect(player.getLocation(), Effect.LARGE_SMOKE,2, 2);
         player.playSound(player.getLocation(), Sound.EXPLODE, 1.0f, 2.0f);
-        player.sendMessage(CustomColor.translate("&cYou were shrunk in the border!"));
+        player.sendMessage(ChatUtils.translate("&cYou were shrunk in the border!"));
     }
 }
