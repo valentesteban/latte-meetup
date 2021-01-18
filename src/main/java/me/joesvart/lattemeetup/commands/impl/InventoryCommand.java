@@ -22,7 +22,7 @@ public class InventoryCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String s, String[] args) {
         if(sender instanceof ConsoleCommandSender) {
-            sender.sendMessage(ChatUtils.translate("&cOnly players can perform this command."));
+            sender.sendMessage(ChatUtils.translate(LatteMeetup.getPlugin().getMessagesConfig().getString("MESSAGES.NO-CONSOLE")));
             return false;
         }
 
@@ -38,7 +38,7 @@ public class InventoryCommand extends Command {
         GameData gameData = GameManager.getData();
 
         /* If the game state is not equal to WINNER cannot do this */
-        if(!gameData.getGameState().equals(GameState.WINNER)) {
+        if(!gameData.getGameState().equals(GameState.ENDED)) {
             player.sendMessage(ChatUtils.translate("&cYou cannot do this now."));
             return false;
         }

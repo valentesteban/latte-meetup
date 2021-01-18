@@ -8,9 +8,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import me.joesvart.lattemeetup.scenario.Scenario;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class BowlessScenario extends Scenario {
 
     public BowlessScenario() {

@@ -18,9 +18,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class TimeBombScenario extends Scenario {
 
     public TimeBombScenario() {

@@ -2,8 +2,8 @@ package me.joesvart.lattemeetup.leaderboards.buttons;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.item.ItemCreator;
+import me.joesvart.lattelibs.menu.Button;
 import me.joesvart.lattemeetup.player.PlayerData;
-import me.joesvart.lattemeetup.util.menu.Button;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;

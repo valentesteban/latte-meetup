@@ -8,9 +8,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class FirelessScenario extends Scenario {
 
     public FirelessScenario() {

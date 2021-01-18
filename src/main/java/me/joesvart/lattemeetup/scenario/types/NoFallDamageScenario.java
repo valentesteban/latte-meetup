@@ -9,9 +9,6 @@ import me.joesvart.lattemeetup.scenario.Scenario;
 
 import static org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class NoFallDamageScenario extends Scenario {
 
     public NoFallDamageScenario() {

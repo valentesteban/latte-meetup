@@ -11,13 +11,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class DoNotDisturbScenario extends Scenario {
 
     public DoNotDisturbScenario() {
-        super("NoClean+", new ItemStack(Material.BED), "No disturbing fights! Once you hit a player, you can only hit them. This features removes after 30 seconds.");
+        super(
+            "DoNotDisturb", new ItemStack(Material.BED),
+            "No disturbing fights! Once you hit a player, you can only hit them. This features removes after 30 seconds.");
     }
 
     @EventHandler

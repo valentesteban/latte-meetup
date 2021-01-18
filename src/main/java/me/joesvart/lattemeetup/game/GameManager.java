@@ -3,7 +3,6 @@ package me.joesvart.lattemeetup.game;
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.chat.Clickable;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.config.MessagesFile;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
 import me.joesvart.lattemeetup.scenario.Scenario;
@@ -25,13 +24,13 @@ import java.util.List;
 
 public class GameManager {
 
+    private LatteMeetup plugin = LatteMeetup.getInstance();
+
     @Getter
     private static GameData data = new GameData();
 
     @Getter
     private List<Material> whitelistedBlocks = new ArrayList<>();
-
-    private LatteMeetup plugin = LatteMeetup.getInstance();
 
     private boolean broadcasted;
 
@@ -60,7 +59,7 @@ public class GameManager {
             player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 1F, 1F);
 
             /* Send a title saying the game has started */
-            if (MessagesFile.getConfig().getBoolean("BOOLEANS.TITLES")) {
+            if (plugin.getMessagesConfig().getBoolean("BOOLEANS.TITLES")) {
                 player.sendTitle(ChatUtils.GREEN + ChatUtils.B + "BEGUN", ChatUtils.YELLOW + "Good luck!");
             }
         });
@@ -122,7 +121,7 @@ public class GameManager {
         Bukkit.getOnlinePlayers().forEach(o -> clickable.sendToPlayer(o));
         Msg.sendMessage(ChatUtils.SECONDARY + "Kills: " + ChatUtils.PRIMARY + winner.getGameKills() + ChatUtils.GRAY + " - " + ChatUtils.SECONDARY + "Total Wins: " + ChatUtils.PRIMARY + winner.getWins());
         Msg.sendMessage("&7&m" + StringUtils.repeat('-', 45));
-        data.setGameState(GameState.WINNER);
+        data.setGameState(GameState.ENDED);
 
         new EndTask();
     }

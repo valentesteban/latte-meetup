@@ -1,7 +1,7 @@
 package me.joesvart.lattemeetup.managers;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
-import me.joesvart.lattemeetup.config.MessagesFile;
+import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.scenario.Scenario;
@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VoteManager {
+
+    private LatteMeetup plugin = LatteMeetup.getInstance();
 
     @Getter
     private Map<Scenario, Integer> votes = new HashMap<>();
@@ -41,7 +43,7 @@ public class VoteManager {
         PlayerData.getByName(player.getName()).setLastVoted(scenario.getName());
         player.sendMessage(ChatUtils.SECONDARY + "You have casted your vote for " + ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + ".");
 
-        if (MessagesFile.getConfig().getBoolean("BOOLEANS.SOUNDS")) {
+        if (plugin.getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
             MeetupUtils.handleSound(player, Sound.NOTE_PIANO);
         }
     }
@@ -52,7 +54,7 @@ public class VoteManager {
         if(data.getLastVoted().equals(newVote.getName())) {
             player.sendMessage(ChatUtils.RED + "You have already voted for " + newVote.getName() + ".");
 
-            if (MessagesFile.getConfig().getBoolean("BOOLEANS.SOUNDS")) {
+            if (plugin.getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
                 MeetupUtils.handleSound(player, Sound.DIG_GRASS);
             }
             return;

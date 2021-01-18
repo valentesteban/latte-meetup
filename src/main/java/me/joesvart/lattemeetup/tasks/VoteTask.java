@@ -2,7 +2,6 @@ package me.joesvart.lattemeetup.tasks;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.config.MessagesFile;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.util.chat.Msg;
@@ -43,7 +42,7 @@ public class VoteTask extends BukkitRunnable {
         if(Arrays.asList(30, 15, 10, 5, 4, 3, 2, 1).contains(data.getVoteTime())) {
             Msg.sendMessage(ChatUtils.SECONDARY + "Voting ends in " + ChatUtils.PRIMARY + data.getVoteTime() + ChatUtils.SECONDARY + " second" + (data.getVoteTime() > 1 ? "s" : "") + ".");
 
-            if (MessagesFile.getConfig().getBoolean("BOOLEANS.SOUNDS")) {
+            if (plugin.getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
                 Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1F, 1F));
             }
         }

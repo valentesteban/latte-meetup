@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup.game;
 
 public enum GameState {
-    WINNER,
+    ENDED,
     PLAYING,
     STARTING,
-    VOTE
+    LOBBY
 }

@@ -38,16 +38,27 @@ public class PlayerData {
         this.name = name;
         this.uuid = Bukkit.getOfflinePlayer(name).getUniqueId();
 
+        load();
+
         playerDatas.put(uuid, this);
     }
 
     public void load() {
-        Document document = LatteMeetup.getInstance().getMeetupDatabase().getMeetupProfiles().find(Filters.eq("uuid", this.uuid.toString())).first();
+        Document document = LatteMeetup.getInstance().getMongoDatabase().getCollection("profiles").find(Filters.eq("uuid", uuid.toString())).first();
 
         if (document != null) {
-            this.deaths = document.getInteger("deaths");
-            this.wins = document.getInteger("wins");
-            this.played = document.getInteger("played");
+            if (document.containsKey("kills")) {
+                kills = document.getInteger("kills");
+            }
+            if (document.containsKey("deaths")) {
+                deaths = document.getInteger("deaths");
+            }
+            if (document.containsKey("wins")) {
+                wins = document.getInteger("wins");
+            }
+            if (document.containsKey("played")) {
+                played = document.getInteger("played");
+            }
         }
 
         loaded = true;
@@ -64,7 +75,7 @@ public class PlayerData {
         document.put("wins", wins);
         document.put("played", played);
 
-        LatteMeetup.getInstance().getMeetupDatabase().getMeetupProfiles().replaceOne(Filters.eq("uuid", uuid.toString()), document, new UpdateOptions().upsert(true));
+        LatteMeetup.getInstance().getMongoDatabase().getCollection("profiles").replaceOne(Filters.eq("uuid", uuid.toString()), document, new UpdateOptions().upsert(true));
 
         loaded = false;
     }

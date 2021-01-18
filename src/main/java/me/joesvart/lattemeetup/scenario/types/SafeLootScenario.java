@@ -11,9 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class SafeLootScenario extends Scenario {
 
     public SafeLootScenario() {

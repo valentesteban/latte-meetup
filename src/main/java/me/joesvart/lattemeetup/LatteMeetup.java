@@ -1,10 +1,16 @@
 package me.joesvart.lattemeetup;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoDatabase;
 import lombok.Setter;
+import me.joesvart.lattelibs.config.BukkitConfigHelper;
+import me.joesvart.lattelibs.menu.MenuListener;
 import me.joesvart.lattelibs.scoreboard.Board;
 import me.joesvart.lattelibs.scoreboard.BoardStyle;
 import me.joesvart.lattemeetup.commands.CommandsManager;
-import me.joesvart.lattemeetup.database.MeetupDatabase;
 import me.joesvart.lattemeetup.game.GameListener;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.border.BorderManager;
@@ -21,7 +27,6 @@ import me.joesvart.lattemeetup.managers.ItemManager;
 import me.joesvart.lattemeetup.managers.SpectatorManager;
 import me.joesvart.lattemeetup.providers.MeetupBoard;
 import me.joesvart.lattemeetup.tasks.VoteTask;
-import me.joesvart.lattemeetup.util.menu.MenuListener;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import lombok.Getter;
 import me.joesvart.lattetab.LatteTab;
@@ -33,13 +38,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 @Getter @Setter
 public class LatteMeetup extends JavaPlugin {
 
-    @Getter
-    private static LatteMeetup instance;
+    @Getter private static LatteMeetup instance;
+    @Getter private static LatteMeetup plugin;
 
-    @Getter
-    private static LatteMeetup plugin;
-
-    public static int MIN_PLAYERS = 8;
+    public static int MIN_PLAYERS = 2;
 
     private BorderManager borderManager;
     private GameManager gameManager;
@@ -49,58 +51,77 @@ public class LatteMeetup extends JavaPlugin {
     private SpectatorManager spectatorManager;
     private ItemManager itemManager;
     private VoteManager voteManager;
-    private MeetupDatabase meetupDatabase;
+
+    private BukkitConfigHelper messagesConfig;
+    private BukkitConfigHelper scoreboardConfig;
+    private BukkitConfigHelper databaseConfig;
+
+    @Getter
+    private MongoDatabase mongoDatabase;
 
     @Override
     public void onEnable() {
         instance = this;
         plugin = this;
 
-        /* Initialize the Mongo Database */
-        meetupDatabase = new MeetupDatabase(this);
+        /**
+         * Load and create the configurations
+         */
+        messagesConfig = new BukkitConfigHelper(this, "messages");
+        scoreboardConfig = new BukkitConfigHelper(this, "scoreboard");
+        databaseConfig = new BukkitConfigHelper(this, "config");
 
-        /* Setup configuration */
-        getConfig().options().copyDefaults(true);
-        saveConfig();
+        /**
+         * Initialize the Mongo Database
+         */
+        loadMongo();
 
-        /* Register the commons */
+        /**
+         * Register all the stuff
+         */
         registerCommands();
         registerListeners();
         registerManagers();
         registerBoard();
         registerTab();
 
-        /* Initialize the Vote stage */
+        /**
+         * Initialize the Vote Stage
+         */
         new VoteTask();
     }
 
     @Override
     public void onDisable() {
-        /* Delete the current world */
+        /**
+         * Delete the current world
+         */
         MeetupUtils.deleteWorld();
-
-        /* Close and save the database */
-        MeetupDatabase.getInstance().getClient().close();
-
     }
 
     private void registerCommands() {
-        /* Register the commands */
+        /**
+         * Register the commands
+         */
         new CommandsManager();
     }
 
     private void registerListeners() {
-        /* Register the listeners */
+        /**
+         * Register the listeners
+         */
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new LobbyListener(), this);
         Bukkit.getPluginManager().registerEvents(new GameListener(), this);
         Bukkit.getPluginManager().registerEvents(new DeathMessagesListener(), this);
         Bukkit.getPluginManager().registerEvents(new SpectatorListener(), this);
-        Bukkit.getPluginManager().registerEvents(new MenuListener(), this);
+        Bukkit.getPluginManager().registerEvents(new MenuListener(this), this);
     }
 
     private void registerManagers() {
-        /* Register the Managers */
+        /**
+         * Register the Managers
+         */
         borderManager = new BorderManager();
         scenarioManager = new ScenarioManager();
         voteManager = new VoteManager();
@@ -112,19 +133,25 @@ public class LatteMeetup extends JavaPlugin {
     }
 
     private void registerBoard() {
-        /* Register the Scoreboard */
+        /**
+         * Register the Scoreboard
+         */
         Board board = new Board(this, new MeetupBoard());
         board.setTicks(2);
         board.setBoardStyle(BoardStyle.MODERN);
     }
 
     private void registerTab() {
-        /* Register the Tablist */
+        /**
+         * Register the Tablist
+         */
         new LatteTab(this, new MeetupTab());
     }
 
-    public void setWorldProperties() {
-        /* Setup the perfect world for the game */
+    public void loadPerfectWorld() {
+        /**
+         * Setup the perfect world for the UHC-Meetup game
+         */
         Bukkit.getWorlds().forEach(world -> world.getEntities().forEach(Entity::remove));
 
         World uhc = Bukkit.getWorld("meetup_world");
@@ -134,5 +161,24 @@ public class LatteMeetup extends JavaPlugin {
         uhc.setGameRuleValue("doFireTick", "false");
         uhc.setGameRuleValue("difficulty", "0");
         uhc.setTime(0);
+    }
+
+    private void loadMongo() {
+        if (databaseConfig.getBoolean("MONGO.AUTHENTICATION.ENABLED")) {
+            mongoDatabase = new MongoClient(
+                new ServerAddress(
+                    databaseConfig.getString("MONGO.HOST"),
+                    databaseConfig.getInteger("MONGO.PORT")
+                ),
+                MongoCredential.createCredential(
+                    databaseConfig.getString("MONGO.AUTHENTICATION.USERNAME"),
+                    "admin", databaseConfig.getString("MONGO.AUTHENTICATION.PASSWORD").toCharArray()
+                ),
+                MongoClientOptions.builder().build()
+            ).getDatabase("LatteMeetup");
+        } else {
+            mongoDatabase = new MongoClient(databaseConfig.getString("MONGO.HOST"), databaseConfig.getInteger("MONGO.PORT"))
+                .getDatabase("LatteMeetup");
+        }
     }
 }

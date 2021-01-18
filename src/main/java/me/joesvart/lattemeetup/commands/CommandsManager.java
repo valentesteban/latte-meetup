@@ -14,7 +14,7 @@ public class CommandsManager {
     public CommandsManager() {
         Arrays.asList(
 
-                // Meetup Commands
+                // UHC-Meetup Commands
                 new InventoryCommand(),
                 new StartCommand()
         ).forEach(this::registerCommand);

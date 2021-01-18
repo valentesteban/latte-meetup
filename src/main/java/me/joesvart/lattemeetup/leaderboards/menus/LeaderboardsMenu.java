@@ -1,8 +1,8 @@
 package me.joesvart.lattemeetup.leaderboards.menus;
 
+import me.joesvart.lattelibs.menu.Button;
+import me.joesvart.lattelibs.menu.Menu;
 import me.joesvart.lattemeetup.leaderboards.buttons.*;
-import me.joesvart.lattemeetup.util.menu.Button;
-import me.joesvart.lattemeetup.util.menu.Menu;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -24,7 +24,10 @@ public class LeaderboardsMenu extends Menu {
     public Map<Integer, Button> getButtons(Player player) {
         Map<Integer, Button> buttons = new HashMap<>();
 
-        /* Buttons for the Statistics Menu */
+        /**
+         * Buttons for the
+         * statistics menu
+         */
         buttons.put(19, new KillsButton());
         buttons.put(21, new DeathsButton());
         buttons.put(23, new WinsButton());

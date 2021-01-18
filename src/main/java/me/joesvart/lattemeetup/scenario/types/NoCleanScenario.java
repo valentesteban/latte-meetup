@@ -12,9 +12,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import me.joesvart.lattemeetup.scenario.Scenario;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class NoCleanScenario extends Scenario {
 
     public NoCleanScenario() {

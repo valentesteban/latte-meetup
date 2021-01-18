@@ -1,3 +1,9 @@
 BOOLEANS:
   TITLES: true
   SOUNDS: true
+
+MESSAGES:
+  NO-CONSOLE: "&cYou can't execute this command on the console."
+  NO-PERMISSION: "&cYou don't have permission to use this command."
+  FORCE-START: "&aThe game has been forced to start!"
+

@@ -3,7 +3,6 @@ package me.joesvart.lattemeetup.managers;
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.item.ItemCreator;
 import me.joesvart.lattemeetup.LatteMeetup;
-import me.joesvart.lattemeetup.config.MessagesFile;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
 import me.joesvart.lattemeetup.util.chat.StringUtils;
@@ -44,7 +43,7 @@ public class SpectatorManager {
         player.setFlySpeed(0.2F);
 
         /* Send a title saying you has been killed, and now you are a spectator. */
-        if (MessagesFile.getConfig().getBoolean("BOOLEANS.TITLES")) {
+        if (plugin.getMessagesConfig().getBoolean("BOOLEANS.TITLES")) {
             player.sendTitle(ChatUtils.RED + ChatUtils.B + "DEAD", ChatUtils.YELLOW + "You are now a spectator!");
         }
 

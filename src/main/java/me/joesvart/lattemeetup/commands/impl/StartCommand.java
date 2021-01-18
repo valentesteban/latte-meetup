@@ -19,13 +19,13 @@ public class StartCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String s, String[] args) {
         if(sender instanceof ConsoleCommandSender) {
-            sender.sendMessage(ChatUtils.translate("&COnly players can perform this command."));
+            sender.sendMessage(ChatUtils.translate(LatteMeetup.getPlugin().getMessagesConfig().getString("MESSAGES.NO-CONSOLE")));
             return true;
         }
 
         /* Insufficient permission message */
         if(!sender.hasPermission("lattemeetup.admin")) {
-            sender.sendMessage(ChatUtils.RED + "You do not have permission for execute this command.");
+            sender.sendMessage(ChatUtils.translate(LatteMeetup.getPlugin().getMessagesConfig().getString("MESSAGES.NO-PERMISSION")));
             return true;
         }
 
@@ -34,7 +34,7 @@ public class StartCommand extends Command {
 
         /* Game successfully started message */
         Msg.sendMessage("");
-        Msg.sendMessage(ChatUtils.DARK_GREEN + player.getName() + ChatUtils.GREEN + " forced the game to start!");
+        Msg.sendMessage(ChatUtils.translate(LatteMeetup.getPlugin().getMessagesConfig().getString("MESSAGES.FORCE-START")));
         Msg.sendMessage("");
 
         return false;

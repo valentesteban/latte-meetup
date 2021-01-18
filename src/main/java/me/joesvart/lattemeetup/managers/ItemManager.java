@@ -14,7 +14,7 @@ public class ItemManager {
             .build());
 
         player.getInventory().setItem(7, new ItemCreator(Material.EMERALD)
-            .name(ChatUtils.GREEN + "Leaderboards Menu")
+            .name(ChatUtils.GREEN + "Leaderboards")
             .lore(ChatUtils.GRAY + "Right click to open the menu.")
             .build());
 
@@ -28,7 +28,7 @@ public class ItemManager {
 
     void handleSpectatorInventory(Player player) {
         player.getInventory().setItem(0, new ItemCreator(Material.ITEM_FRAME)
-            .name(ChatUtils.AQUA + "Spectate Menu")
+            .name(ChatUtils.AQUA + "Spectate")
             .lore(ChatUtils.GRAY + ("Right click to open the menu."))
             .build());
 

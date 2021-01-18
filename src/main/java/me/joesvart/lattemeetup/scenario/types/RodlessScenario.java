@@ -8,9 +8,6 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * Created by Joesvart on 20.09.2020.
- */
 public class RodlessScenario extends Scenario {
 
     public RodlessScenario() {

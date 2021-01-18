@@ -27,7 +27,7 @@ public class GameData {
 
     private String scenario = "None", loading = "";
 
-    private GameState gameState = GameState.VOTE;
+    private GameState gameState = GameState.LOBBY;
 
     public int getNextBorder() {
         switch (border) {
@@ -39,7 +39,7 @@ public class GameData {
     }
 
     public String getStatus() {
-        return gameState == GameState.PLAYING ? "&aPlaying" : gameState == GameState.STARTING ? "&eStarting" : gameState == GameState.VOTE ? "&eVoting" : gameState == GameState.WINNER ? "&bEnding" : "&cSetup";
+        return gameState == GameState.PLAYING ? "&aPlaying" : gameState == GameState.STARTING ? "&eStarting" : gameState == GameState.LOBBY ? "&eWaiting" : gameState == GameState.ENDED ? "&bEnding" : "&cSetup";
     }
 
     public String getFormattedBorderStatus() {

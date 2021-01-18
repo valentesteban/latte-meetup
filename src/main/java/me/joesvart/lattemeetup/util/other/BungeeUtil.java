@@ -1,9 +1,9 @@
 package me.joesvart.lattemeetup.util.other;
 
+import me.joesvart.lattelibs.event.bungee.BungeeConnectEvent;
 import me.joesvart.lattemeetup.LatteMeetup;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import me.joesvart.lattemeetup.util.event.BungeeConnectEvent;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -119,7 +119,7 @@ public class WorldGenTask extends BukkitRunnable {
         gameManager.handleSetWhitelistedBlocks();
         gameManager.handleLoadChunks();
         new Border(Bukkit.getWorld("meetup_world"), 100);
-        LatteMeetup.getInstance().setWorldProperties();
+        LatteMeetup.getInstance().loadPerfectWorld();
     }
 
     private boolean deleteDirectory(File path) {

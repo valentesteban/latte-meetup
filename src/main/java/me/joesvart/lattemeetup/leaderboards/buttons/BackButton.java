@@ -3,7 +3,7 @@ package me.joesvart.lattemeetup.leaderboards.buttons;
 import lombok.AllArgsConstructor;
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.item.ItemCreator;
-import me.joesvart.lattemeetup.util.menu.Button;
+import me.joesvart.lattelibs.menu.Button;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

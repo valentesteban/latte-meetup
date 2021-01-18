@@ -1,8 +1,6 @@
 package me.joesvart.lattemeetup.listeners;
 
-import javafx.animation.Animation;
 import me.joesvart.lattelibs.chat.ChatUtils;
-import me.joesvart.lattelibs.utils.AnimationUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.game.GameState;
@@ -65,17 +63,8 @@ public class PlayerListener implements Listener {
             player.kickPlayer(StringUtils.LOAD_ERROR);
         }
 
-        /* Animation for the Links on the Tablist and the Scoreboard */
-        AnimationUtils animation = new AnimationUtils("Link", player.getUniqueId(), 40L);
-
-        animation.getLines().add(ChatUtils.translate("&7&olatte.org"));
-        animation.getLines().add(ChatUtils.translate("&7&oww.latte.org"));
-        animation.getLines().add(ChatUtils.translate("&7&olatte.org/discord"));
-        animation.getLines().add(ChatUtils.translate("&7&ots.latte.org"));
-        animation.getLines().add(ChatUtils.translate("&7&o@LatteNET"));
-
         switch (GameManager.getData().getGameState()) {
-            case WINNER:
+            case ENDED:
             case PLAYING:
                 plugin.getSpectatorManager().handleEnable(player);
 
@@ -89,10 +78,10 @@ public class PlayerListener implements Listener {
                 }, 1L);
                 break;
             case STARTING:
-            case VOTE:
+            case LOBBY:
                 MeetupUtils.clearPlayer(player);
 
-                if(GameManager.getData().getGameState().equals(GameState.VOTE)) {
+                if(GameManager.getData().getGameState().equals(GameState.LOBBY)) {
                     player.teleport(new Location(Bukkit.getWorld("world"), 0.5, 100, 0.5, 0, 0));
                     plugin.getItemManager().handleLobbyInventory(player);
                 } else {

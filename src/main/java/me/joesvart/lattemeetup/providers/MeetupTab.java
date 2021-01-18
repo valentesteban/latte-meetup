@@ -46,16 +46,16 @@ public class MeetupTab implements TabAdapter {
             case PLAYING: {
                 return getPlayingTab(player);
             }
-            case WINNER: {
+            case ENDED: {
                 return getWinnerTab(player);
             }
-            case VOTE:
-                return getVoteTab(player);
+            case LOBBY:
+                return getLobbyTab(player);
         }
         return null;
     }
 
-    public List<TabEntry> getVoteTab(Player player) {
+    public List<TabEntry> getLobbyTab(Player player) {
         List<TabEntry> tabEntries = new ArrayList<>();
 
         GameData data = GameManager.getData();
