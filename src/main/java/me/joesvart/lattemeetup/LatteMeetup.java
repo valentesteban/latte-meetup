@@ -41,8 +41,6 @@ public class LatteMeetup extends JavaPlugin {
     @Getter private static LatteMeetup instance;
     @Getter private static LatteMeetup plugin;
 
-    public static int MIN_PLAYERS = 2;
-
     private BorderManager borderManager;
     private GameManager gameManager;
     private InventoryManager inventoryManager;
