@@ -64,7 +64,7 @@ public class MeetupTab implements TabAdapter {
         /* First Column */
 
         // Game State
-        if(Bukkit.getOnlinePlayers().size() < LatteMeetup.MIN_PLAYERS) {
+        if(Bukkit.getOnlinePlayers().size() < plugin.getMessagesConfig().getInteger("MIN-PLAYERS")) {
             tabEntries.add(new TabEntry(0, 5, ChatUtils.translate("&2Game state")));
             tabEntries.add(new TabEntry(0, 6, ChatUtils.translate("&aWaiting for players") + GameManager.getData().getLoading()));
         }
