@@ -53,8 +53,8 @@ public class MeetupBoard implements BoardAdapter {
 
         for (String line : ChatUtils.translate(plugin.getScoreboardConfig().getStringList("SCOREBOARD.LOBBY"))) {
             line = line.replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size()));
-            line = line.replaceAll("<players-needed>", String.valueOf(LatteMeetup.MIN_PLAYERS));
-            line = line.replaceAll("<max-players>", String.valueOf(Bukkit.getMaxPlayers()));
+            line = line.replaceAll("<min-players>", String.valueOf(plugin.getMessagesConfig().getInteger("MIN-PLAYERS")));
+            line = line.replaceAll("<max-players>", String.valueOf(plugin.getMessagesConfig().getInteger("MAX-PLAYERS")));
 
             board.add(line);
         }
@@ -86,7 +86,6 @@ public class MeetupBoard implements BoardAdapter {
         for (String line : ChatUtils.translate(plugin.getScoreboardConfig().getStringList("SCOREBOARD.PLAYING"))) {
             line = line.replaceAll("<remaining>", "" + PlayerData.getAlivePlayers());
             line = line.replaceAll("<kills>", "" + playerData.getGameKills());
-            line = line.replaceAll("<kills>", "" + playerData.getDeaths());
             line = line.replaceAll("<player-ping>", "" + PlayerUtils.getPing(player));
             line = line.replaceAll("<border>", "" + data.getBorder());
             line = line.replaceAll("<shrinking>", "" + data.getFormattedBorderStatus());
