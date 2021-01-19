@@ -1,23 +1,25 @@
 package me.joesvart.lattemeetup.border;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
+import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.game.GameState;
-import me.joesvart.lattespigot.LatteSpigot;
-import me.joesvart.lattespigot.handler.MovementHandler;
+import me.joesvart.paperexample.PaperExample;
+import me.joesvart.paperexample.handler.MovementHandler;
 import net.minecraft.server.v1_8_R3.PacketPlayInFlying;
 import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import me.joesvart.lattemeetup.game.GameManager;
 
 public class BorderManager {
 
     public BorderManager() {
-        LatteSpigot.get().addMovementHandler(new MovementHandler() {
+        PaperExample.INSTANCE.addMovementHandler(new MovementHandler() {
             @Override
             public void handleUpdateLocation(Player player, Location to, Location from, PacketPlayInFlying packetPlayInFlying) {
                 if(GameManager.getData().getGameState().equals(GameState.STARTING)) {
                     if(to.getX() != from.getX() || to.getZ() != from.getZ()) {
                         player.teleport(from);
+                        ((CraftPlayer) player).getHandle().playerConnection.checkMovement = false;
                         return;
                     }
                 }
@@ -62,7 +64,6 @@ public class BorderManager {
 
             @Override
             public void handleUpdateRotation(Player player, Location location, Location location1, PacketPlayInFlying packetPlayInFlying) {
-
             }
         });
     }
@@ -70,6 +71,6 @@ public class BorderManager {
     private void handleEffects(Player player) {
         player.getWorld().playEffect(player.getLocation(), Effect.LARGE_SMOKE,2, 2);
         player.playSound(player.getLocation(), Sound.EXPLODE, 1.0f, 2.0f);
-        player.sendMessage(ChatUtils.translate("&cYou were shrunk in the border!"));
+        player.sendMessage(ChatUtils.translate("&cYou can't go over the border!"));
     }
 }
