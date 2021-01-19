@@ -2,8 +2,9 @@ BOOLEANS:
   TITLES: true
   SOUNDS: true
 
-MIN-PLAYERS: 2
-MAX-PLAYERS: 8
+GAME:
+  MIN-PLAYERS: 2
+  MAX-PLAYERS: 8
 
 MESSAGES:
   NO-CONSOLE: "&cYou can't execute this command on the console."

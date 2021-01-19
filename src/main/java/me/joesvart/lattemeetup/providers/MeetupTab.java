@@ -64,7 +64,7 @@ public class MeetupTab implements TabAdapter {
         /* First Column */
 
         // Game State
-        if(Bukkit.getOnlinePlayers().size() < plugin.getMessagesConfig().getInteger("MIN-PLAYERS")) {
+        if(Bukkit.getOnlinePlayers().size() < plugin.getMessagesConfig().getInteger("GAME.MIN-PLAYERS")) {
             tabEntries.add(new TabEntry(0, 5, ChatUtils.translate("&2Game state")));
             tabEntries.add(new TabEntry(0, 6, ChatUtils.translate("&aWaiting for players") + GameManager.getData().getLoading()));
         }
@@ -169,7 +169,7 @@ public class MeetupTab implements TabAdapter {
 
         // Player Information
         tabEntries.add(new TabEntry(1, 2, ChatUtils.translate("&2&lYou")));
-        tabEntries.add(new TabEntry(1, 3, ChatUtils.translate("&b") + player.getDisplayName()).setSkin(Skin.getPlayer(player)));
+        tabEntries.add(new TabEntry(1, 3, ChatUtils.translate("&f") + player.getDisplayName()).setSkin(Skin.getPlayer(player)));
 
         tabEntries.add(new TabEntry(1, 5, ChatUtils.translate("&7Your kills: &f") + playerData.getGameKills()));
         tabEntries.add(new TabEntry(1, 6, ChatUtils.translate("&7Your ping: &f") + PlayerUtils.getPing(player)));

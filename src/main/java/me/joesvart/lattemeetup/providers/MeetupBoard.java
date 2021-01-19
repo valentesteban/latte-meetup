@@ -53,8 +53,8 @@ public class MeetupBoard implements BoardAdapter {
 
         for (String line : ChatUtils.translate(plugin.getScoreboardConfig().getStringList("SCOREBOARD.LOBBY"))) {
             line = line.replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size()));
-            line = line.replaceAll("<min-players>", String.valueOf(plugin.getMessagesConfig().getInteger("MIN-PLAYERS")));
-            line = line.replaceAll("<max-players>", String.valueOf(plugin.getMessagesConfig().getInteger("MAX-PLAYERS")));
+            line = line.replaceAll("<min-players>", String.valueOf(plugin.getMessagesConfig().getInteger("GAME.MIN-PLAYERS")));
+            line = line.replaceAll("<max-players>", String.valueOf(plugin.getMessagesConfig().getInteger("GAME.MAX-PLAYERS")));
 
             board.add(line);
         }

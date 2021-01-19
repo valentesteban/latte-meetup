@@ -302,7 +302,7 @@ public class SpectatorListener implements Listener {
 		if(event.getRightClicked() instanceof Player) {
 			Player rightClicked = (Player) event.getRightClicked();
 
-			if(isSpectator(player) && player.hasPermission("meetup.staff")) {
+			if(isSpectator(player) && player.hasPermission("lattemeetup.staff")) {
 				player.openInventory(plugin.getSpectatorManager().getPlayerInventory(rightClicked));
 				event.setCancelled(true);
 			}

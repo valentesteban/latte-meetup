@@ -49,8 +49,6 @@ public class GameManager {
         Msg.sendMessage("");
         Msg.sendMessage(ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + " has been voted for this game's scenario. " + ChatUtils.GRAY + "(" + plugin.getVoteManager().getVotes().get(scenario) + ")");
         Msg.sendMessage("");
-        Msg.sendMessage(ChatUtils.BD_RED + "This is a solo game. Any form of teaming is not allowed and is punishable at staff's discretion.");
-        Msg.sendMessage("");
 
         Bukkit.getOnlinePlayers().forEach(player -> {
             PlayerData data = PlayerData.getByName(player.getName());
@@ -65,7 +63,7 @@ public class GameManager {
         });
 
         /* Game error message */
-        if (Bukkit.getOnlinePlayers().size() <= plugin.getMessagesConfig().getInteger("MIN-PLAYERS")) {
+        if (Bukkit.getOnlinePlayers().size() <= plugin.getMessagesConfig().getInteger("GAME.MIN-PLAYERS")) {
             Bukkit.broadcastMessage(ChatUtils.translate(""));
             Bukkit.broadcastMessage(ChatUtils.translate("&8[&4Error&8] &7The game cannot continue as there are not enough players to play!"));
             Bukkit.broadcastMessage(ChatUtils.translate(""));

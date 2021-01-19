@@ -88,7 +88,7 @@ public class PlayerListener implements Listener {
                     player.teleport(MeetupUtils.getScatterLocation());
                 }
 
-                Msg.sendMessage(ChatUtils.PRIMARY + player.getName() + ChatUtils.SECONDARY + " has joined. " + ChatUtils.GRAY + "(" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")");
+                Msg.sendMessage(ChatUtils.PRIMARY + player.getName() + ChatUtils.YELLOW + " has joined. " + ChatUtils.GRAY + "(" + Bukkit.getOnlinePlayers().size() + "/" + plugin.getMessagesConfig().getInteger("GAME.MAX-PLAYERS") + ")");
 
                 if(GameManager.getData().getGameState().equals(GameState.STARTING)) {
                     plugin.getKitManager().handleItems(player);

@@ -52,6 +52,7 @@ public class LatteMeetup extends JavaPlugin {
 
     private BukkitConfigHelper messagesConfig;
     private BukkitConfigHelper scoreboardConfig;
+    private BukkitConfigHelper tablistConfig;
     private BukkitConfigHelper databaseConfig;
 
     @Getter
@@ -67,6 +68,7 @@ public class LatteMeetup extends JavaPlugin {
          */
         messagesConfig = new BukkitConfigHelper(this, "messages");
         scoreboardConfig = new BukkitConfigHelper(this, "scoreboard");
+        tablistConfig = new BukkitConfigHelper(this, "tablist");
         databaseConfig = new BukkitConfigHelper(this, "config");
 
         /**

@@ -35,7 +35,7 @@ public class VoteTask extends BukkitRunnable {
             return;
         }
 
-        if(Bukkit.getOnlinePlayers().size() >= plugin.getMessagesConfig().getInteger("MIN-PLAYERS")) {
+        if(Bukkit.getOnlinePlayers().size() >= plugin.getMessagesConfig().getInteger("GAME.MIN-PLAYERS")) {
             data.setCanStartCountdown(true);
         }
 
