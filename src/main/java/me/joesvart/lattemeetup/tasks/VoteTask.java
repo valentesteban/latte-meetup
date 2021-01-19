@@ -35,7 +35,7 @@ public class VoteTask extends BukkitRunnable {
             return;
         }
 
-        if(Bukkit.getOnlinePlayers().size() >= LatteMeetup.MIN_PLAYERS) {
+        if(Bukkit.getOnlinePlayers().size() >= plugin.getMessagesConfig().getInteger("MIN-PLAYERS")) {
             data.setCanStartCountdown(true);
         }
 
