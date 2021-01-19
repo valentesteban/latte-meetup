@@ -65,7 +65,7 @@ public class GameManager {
         });
 
         /* Game error message */
-        if (Bukkit.getOnlinePlayers().size() <= 1) {
+        if (Bukkit.getOnlinePlayers().size() <= plugin.getMessagesConfig().getInteger("MIN-PLAYERS")) {
             Bukkit.broadcastMessage(ChatUtils.translate(""));
             Bukkit.broadcastMessage(ChatUtils.translate("&8[&4Error&8] &7The game cannot continue as there are not enough players to play!"));
             Bukkit.broadcastMessage(ChatUtils.translate(""));
