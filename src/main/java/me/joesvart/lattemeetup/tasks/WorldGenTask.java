@@ -2,7 +2,6 @@ package me.joesvart.lattemeetup.tasks;
 
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameManager;
-import me.joesvart.lattemeetup.border.Border;
 import net.minecraft.server.v1_8_R3.BiomeBase;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
