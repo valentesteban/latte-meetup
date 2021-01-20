@@ -16,6 +16,9 @@ import java.util.List;
 public class ScenarioManager {
 
 	@Getter
+	private static LatteMeetup plugin = LatteMeetup.getInstance();
+
+	@Getter
 	private static List<Scenario> scenarios = new ArrayList<>();
 
 	public ScenarioManager() {
@@ -35,17 +38,17 @@ public class ScenarioManager {
 
 	public static ItemStack getItem(Scenario scenario) {
 		List<String> lore = new ArrayList<>();
-		lore.add("");
-		lore.addAll(Arrays.asList(StringUtils.niceLore(scenario.getDescription(), ChatColor.GRAY)));
-		lore.add("");
-		lore.add(ChatUtils.PRIMARY + "Votes: " + ChatUtils.SECONDARY + LatteMeetup.getInstance().getVoteManager().getVotes().get(scenario));
-		lore.add("");
-		lore.add(ChatUtils.GRAY + ChatUtils.I + "Click to vote...");
+		for (String scenarios : ChatUtils.translate(plugin.getScenariosConfig().getStringList("SCENARIOS.LORE"))) {
+			scenarios = scenarios.replaceAll("<description>", scenario.getDescription());
+			scenarios = scenarios.replaceAll("<votes>", String.valueOf((plugin.getVoteManager().getVotes().get(scenario))));
+
+			lore.add(scenarios);
+		}
 
 		return new ItemCreator(scenario.getIcon().getType())
 				.durability(scenario.getIcon().getDurability())
 				.amount(scenario.getIcon().getAmount())
-				.name(ChatUtils.GREEN + scenario.getName())
+				.name(ChatUtils.translate(plugin.getScenariosConfig().getString("SCENARIOS.NAME-COLOR") + scenario.getName()))
 				.lore(lore).build();
 	}
 
