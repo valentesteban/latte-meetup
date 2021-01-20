@@ -40,7 +40,9 @@ public class VoteTask extends BukkitRunnable {
         }
 
         if(Arrays.asList(30, 15, 10, 5, 4, 3, 2, 1).contains(data.getVoteTime())) {
-            Msg.sendMessage(ChatUtils.SECONDARY + "Voting ends in " + ChatUtils.PRIMARY + data.getVoteTime() + ChatUtils.SECONDARY + " second" + (data.getVoteTime() > 1 ? "s" : "") + ".");
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.GAME-VOTE-TIME")
+                .replace("<time>", "" + data.getVoteTime()));
+            Msg.sendMessage(format);
 
             if (plugin.getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
                 Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1F, 1F));
