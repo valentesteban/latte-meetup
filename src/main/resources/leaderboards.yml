@@ -1,0 +1,55 @@
+LEADERBOARDS:
+  MENU-TITLE: "Leaderboards menu"
+  MENU-SIZE: 54
+
+KILLS-BUTTON:
+  SLOT: 19
+  NAME: "&3Your kills"
+  LORE:
+    - "&7&m--------------------------"
+    - "&7Your kills: &f<kills>"
+    - ""
+    - "&8The statistics will be updated"
+    - "&8after every game."
+    - "&7&m--------------------------"
+  ENABLED: true
+
+DEATHS-BUTTON:
+  SLOT: 21
+  NAME: "&3Your deaths"
+  LORE:
+    - "&7&m--------------------------"
+    - "&7Your deaths: &f<deaths>"
+    - ""
+    - "&8The statistics will be updated"
+    - "&8after every game."
+    - "&7&m--------------------------"
+  ENABLED: true
+
+WINS-BUTTON:
+  SLOT: 23
+  NAME: "&3Your wins"
+  LORE:
+    - "&7&m--------------------------"
+    - "&7Your wins: &f<wins>"
+    - ""
+    - "&8The statistics will be updated"
+    - "&8after every game."
+    - "&7&m--------------------------"
+  ENABLED: true
+
+GAMES-PLAYED-BUTTON:
+  SLOT: 25
+  NAME: "&3Your games"
+  LORE:
+    - "&7&m--------------------------"
+    - "&7Your games: &f<games-played>"
+    - ""
+    - "&8The statistics will be updated"
+    - "&8after every game."
+    - "&7&m--------------------------"
+  ENABLED: true
+
+BACK-BUTTON:
+  SLOT: 40
+  ENABLED: true

@@ -1,0 +1,72 @@
+BOOLEANS:
+  # Lobby items
+  SCENARIOS-ITEM:
+    ENABLED: true
+    LORE: true
+  LEADERBOARDS-ITEM:
+    ENABLED: true
+    LORE: true
+  LOBBY-ITEM:
+    ENABLED: true
+    LORE: true
+
+  # Spectator Items
+  SPECTATE-MENU-ITEM:
+    ENABLED: true
+    LORE: true
+  RANDOM-TELEPORT-ITEM:
+    ENABLED: true
+    LORE: true
+  NAVIGATION-COMPASS-ITEM:
+    ENABLED: true
+    LORE: true
+  LEAVE-GAME-ITEM:
+    ENABLED: true
+    LORE: true
+
+ITEMS:
+  # Lobby items
+  SCENARIOS-ITEM:
+    NAME: "&bScenarios"
+    LORE:
+      - "&7Right click to vote for the scenarios."
+    ID: 340
+    SLOT: 0
+  LEADERBOARDS-ITEM:
+    NAME: "&bLeaderboards"
+    LORE:
+      - "&7Right click to open the menu."
+    ID: 388
+    SLOT: 7
+  LOBBY-ITEM:
+    NAME: "&bReturn to Lobby"
+    LORE:
+      - "&7Right click to return to the main Lobby."
+    ID: 355
+    SLOT: 8
+
+  # Spectator Items
+  SPECTATE-MENU-ITEM:
+    NAME: "&bSpectate"
+    LORE:
+      - "&7Right click to open the menu."
+    ID: 389
+    SLOT: 0
+  RANDOM-TELEPORT-ITEM:
+    NAME: "&3Random Teleport"
+    LORE:
+      - "&7Right click to teleport to a random player."
+    ID: 264
+    SLOT: 1
+  NAVIGATION-COMPASS-ITEM:
+    NAME: "&dNavigation Compass"
+    LORE:
+      - "&7Right click to teleport to that position."
+    ID: 345
+    SLOT: 4
+  LEAVE-GAME-ITEM:
+    NAME: "&aLeave the game"
+    LORE:
+      - "&7Right click to return to Lobby."
+    ID: 355
+    SLOT: 8
