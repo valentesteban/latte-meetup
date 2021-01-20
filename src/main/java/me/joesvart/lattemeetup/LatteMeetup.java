@@ -10,10 +10,10 @@ import me.joesvart.lattelibs.config.BukkitConfigHelper;
 import me.joesvart.lattelibs.menu.MenuListener;
 import me.joesvart.lattelibs.scoreboard.Board;
 import me.joesvart.lattelibs.scoreboard.BoardStyle;
+import me.joesvart.lattemeetup.border.BorderManager;
 import me.joesvart.lattemeetup.commands.CommandsManager;
 import me.joesvart.lattemeetup.game.GameListener;
 import me.joesvart.lattemeetup.game.GameManager;
-import me.joesvart.lattemeetup.border.BorderManager;
 import me.joesvart.lattemeetup.managers.KitManager;
 import me.joesvart.lattemeetup.listeners.LobbyListener;
 import me.joesvart.lattemeetup.listeners.PlayerListener;
@@ -51,6 +51,8 @@ public class LatteMeetup extends JavaPlugin {
     private VoteManager voteManager;
 
     private BukkitConfigHelper messagesConfig;
+    private BukkitConfigHelper leaderboardsConfig;
+    private BukkitConfigHelper itemsConfig;
     private BukkitConfigHelper scoreboardConfig;
     private BukkitConfigHelper tablistConfig;
     private BukkitConfigHelper databaseConfig;
@@ -67,6 +69,8 @@ public class LatteMeetup extends JavaPlugin {
          * Load and create the configurations
          */
         messagesConfig = new BukkitConfigHelper(this, "messages");
+        itemsConfig = new BukkitConfigHelper(this, "items");
+        leaderboardsConfig = new BukkitConfigHelper(this, "leaderboards");
         scoreboardConfig = new BukkitConfigHelper(this, "scoreboard");
         tablistConfig = new BukkitConfigHelper(this, "tablist");
         databaseConfig = new BukkitConfigHelper(this, "config");
