@@ -16,6 +16,7 @@ public abstract class Scenario implements Listener {
 	private final String name;
 	private final ItemStack icon;
 	private final String description;
+
 	private boolean active = false;
 
 	public void handleToggle() {
