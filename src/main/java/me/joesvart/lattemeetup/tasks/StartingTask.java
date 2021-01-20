@@ -5,6 +5,7 @@ import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.util.chat.Msg;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
@@ -34,7 +35,13 @@ public class StartingTask extends BukkitRunnable {
         }
 
         if(Arrays.asList(15, 10, 5, 4, 3, 2, 1).contains(data.getStartingTime())) {
-            Msg.sendMessage(ChatUtils.SECONDARY + "The game starts in " + ChatUtils.PRIMARY + data.getStartingTime() + ChatUtils.SECONDARY + " second" + (data.getStartingTime() > 1 ? "s" : "") + ".", Sound.ORB_PICKUP);
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.GAME-STARTING-TIME")
+                .replace("<time>", "" + data.getStartingTime()));
+            Msg.sendMessage(format);
+        }
+
+        if (LatteMeetup.getInstance().getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
+            Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1F, 1F));
         }
     }
 }
