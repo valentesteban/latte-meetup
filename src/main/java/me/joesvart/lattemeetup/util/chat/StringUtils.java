@@ -170,12 +170,12 @@ public final class StringUtils {
 		if(text.length() > dif * 2) {
 			first += text.substring(0, dif - 1);
 			second += text.substring(dif, dif * 2);
-			third += text.substring(dif * 2, text.length());
+			third += text.substring(dif * 2);
 
 			return new String[] { first, second, third };
 		} else if(text.length() > dif) {
 			first += text.substring(0, dif - 1);
-			second += text.substring(dif - 1, text.length());
+			second += text.substring(dif - 1);
 
 			return new String[] { first, second };
 		}
