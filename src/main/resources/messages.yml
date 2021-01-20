@@ -3,11 +3,29 @@ BOOLEANS:
   SOUNDS: true
 
 GAME:
-  MIN-PLAYERS: 2
-  MAX-PLAYERS: 8
+  MIN-PLAYERS: 8
+  MAX-PLAYERS: 16
 
 MESSAGES:
   NO-CONSOLE: "&cYou can't execute this command on the console."
   NO-PERMISSION: "&cYou don't have permission to use this command."
+  SPAWN-SET: "&aThe spawn has been set successfully!"
   FORCE-START: "&aThe game has been forced to start!"
+
+  PLAYER-JOIN: "&b<player-name> &3has joined to the game. &7(<players-count>/<max-players>)"
+  PLAYER-DISCONNECTED: "&c<player-name> &4[&7<player-kills>] &7has been disqualified for disconnecting."
+
+  PLAYER-VOTE: "&bYou have casted your vote for &3<scenario>&b."
+  ALREADY-VOTE: "&cYou have already voted for &4<scenario>"
+
+  GAME-SCENARIO: "&3<scenario> &bhas been voted for this game's scenario. &7(<votes>)"
+  GAME-VOTE-TIME: "&bVoting ends in &3<time> &bsecond(s).."
+  GAME-STARTING-TIME: "&bThe game starts in &3<time> &bsecond(s).."
+  GAME-END-TIME: "&bThe game ends in &3<time> &bsecond(s).."
+
+  BORDER-LIMIT: "&cYou can't through the border limit!"
+  BORDER-SHRUNK: "&bThe border has shrunk to &3<border-size> blocks&b."
+  BORDER-SHRINK: "&bBorder is going to shrink to in &3<min-sec>"
+
+  BOW-DAMAGE: "&3<player-name> &bis now at &3<health> &4<heart-symbol>"
 
