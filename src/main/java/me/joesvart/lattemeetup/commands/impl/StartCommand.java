@@ -30,7 +30,7 @@ public class StartCommand extends Command {
         }
 
         Player player = (Player) sender;
-        this.plugin.getGameManager().handleStarting();
+        plugin.getGameManager().handleStarting();
 
         /* Game successfully started message */
         Msg.sendMessage("");
