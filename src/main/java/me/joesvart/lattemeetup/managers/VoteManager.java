@@ -41,7 +41,10 @@ public class VoteManager {
     public void handleAddVote(Player player, Scenario scenario) {
         votes.put(scenario, votes.get(scenario) + 1);
         PlayerData.getByName(player.getName()).setLastVoted(scenario.getName());
-        player.sendMessage(ChatUtils.SECONDARY + "You have casted your vote for " + ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + ".");
+
+        String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.PLAYER-VOTE")
+            .replace("<scenario>", "" + scenario.getName()));
+        player.sendMessage(format);
 
         if (plugin.getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
             MeetupUtils.handleSound(player, Sound.NOTE_PIANO);
@@ -52,7 +55,9 @@ public class VoteManager {
         PlayerData data = PlayerData.getByName(player.getName());
 
         if(data.getLastVoted().equals(newVote.getName())) {
-            player.sendMessage(ChatUtils.RED + "You have already voted for " + newVote.getName() + ".");
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.ALREADY-VOTE")
+                .replace("<scenario>", "" + newVote.getName()));
+            player.sendMessage(format);
 
             if (plugin.getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
                 MeetupUtils.handleSound(player, Sound.DIG_GRASS);
