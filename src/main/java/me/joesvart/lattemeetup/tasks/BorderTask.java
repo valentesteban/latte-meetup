@@ -4,16 +4,16 @@ import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
-import me.joesvart.lattemeetup.border.Border;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.util.chat.Msg;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 
 public class BorderTask extends BukkitRunnable {
+
+    private final LatteMeetup plugin = LatteMeetup.getInstance();
 
     public BorderTask() {
         runTaskTimer(LatteMeetup.getInstance(), 0L, 20L);
@@ -34,9 +34,20 @@ public class BorderTask extends BukkitRunnable {
             }
 
             new Border(Bukkit.getWorld("meetup_world"), data.getNextBorder());
-            Msg.sendMessage(ChatUtils.SECONDARY + "The border has shrunk to " + ChatUtils.PRIMARY + data.getBorder() + ChatUtils.SECONDARY + ".", Sound.CLICK);
+
+            /**
+             * Border shrunk message
+             */
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.BORDER-SHRUNK")
+                .replace("<border-size>", "" + data.getBorder()));
+            Msg.sendMessage(format);
         } else if(Arrays.asList(120, 60, 45, 30, 15, 10, 5, 4, 3, 2, 1).contains(data.getBorderTime())) {
-            Msg.sendMessage(ChatUtils.SECONDARY + "The border will shrink to " + ChatUtils.PRIMARY + data.getNextBorder() + ChatUtils.SECONDARY + " in " + ChatUtils.PRIMARY + (data.getBorderTime() < 60 ? data.getBorderTime() + ChatUtils.SECONDARY + (data.getBorderTime() == 1 ? " second" : " seconds") : data.getBorderTime() / 60 + ChatUtils.SECONDARY + ((data.getBorderTime() / 60) == 1 ? " minute" : " minutes")) + ChatUtils.SECONDARY + ".", Sound.ORB_PICKUP);
+            /**
+             * Border shrink message
+             */
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.BORDER-SHRINK")
+                .replace("<min-sec>", "" + (data.getBorderTime() < 60 ? data.getBorderTime() + (data.getBorderTime() == 1 ? " second" : " seconds") : data.getBorderTime() / 60 + ((data.getBorderTime() / 60) == 1 ? " minute" : " minutes"))));
+            Msg.sendMessage(format);
         }
     }
 }
