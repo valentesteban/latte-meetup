@@ -2,6 +2,7 @@ package me.joesvart.lattemeetup.tasks;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
+import me.joesvart.lattemeetup.border.Border;
 import me.joesvart.lattemeetup.game.GameData;
 import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.player.PlayerData;
