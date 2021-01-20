@@ -2,50 +2,136 @@ package me.joesvart.lattemeetup.managers;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.item.ItemCreator;
+import me.joesvart.lattemeetup.LatteMeetup;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemManager {
     
     public void handleLobbyInventory(Player player) {
-        player.getInventory().setItem(0, new ItemCreator(Material.BOOK)
-            .name(ChatUtils.GREEN + "Scenarios")
-            .lore(ChatUtils.GRAY + "Right click to vote for the scenarios.")
-            .build());
 
-        player.getInventory().setItem(7, new ItemCreator(Material.EMERALD)
-            .name(ChatUtils.GREEN + "Leaderboards")
-            .lore(ChatUtils.GRAY + "Right click to open the menu.")
-            .build());
+        /**
+         * Scenarios item
+         */
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.SCENARIOS-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.SCENARIOS-ITEM.ID"));
 
-        player.getInventory().setItem(8, new ItemCreator(Material.BED)
-            .name(ChatUtils.GREEN + "Return to Lobby")
-            .lore(ChatUtils.GRAY + "Right click to return to the main Lobby.")
-            .build());
-        
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.SCENARIOS-ITEM.NAME")));
+
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.SCENARIOS-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.SCENARIOS-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.SCENARIOS-ITEM.SLOT"), item);
+        }
+
+        /**
+         * Leaderboards item
+         */
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.LEADERBOARDS-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LEADERBOARDS-ITEM.ID"));
+
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.LEADERBOARDS-ITEM.NAME")));
+
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.LEADERBOARDS-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.LEADERBOARDS-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LEADERBOARDS-ITEM.SLOT"), item);
+        }
+
+        /**
+         * Lobby item
+         */
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.LOBBY-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LOBBY-ITEM.ID"));
+
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.LOBBY-ITEM.NAME")));
+
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.LOBBY-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.LOBBY-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LOBBY-ITEM.SLOT"), item);
+        }
+
         player.updateInventory();
     }
 
     void handleSpectatorInventory(Player player) {
-        player.getInventory().setItem(0, new ItemCreator(Material.ITEM_FRAME)
-            .name(ChatUtils.AQUA + "Spectate")
-            .lore(ChatUtils.GRAY + ("Right click to open the menu."))
-            .build());
 
-        player.getInventory().setItem(1, new ItemCreator(Material.DIAMOND)
-            .name(ChatUtils.PRIMARY + "Random Teleport")
-            .lore(ChatUtils.GRAY + ("Right click to teleport to a random player."))
-            .build());
+        /**
+         * Spectate item
+         */
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.SPECTATE-MENU-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.SPECTATE-MENU-ITEM.ID"));
 
-        player.getInventory().setItem(4, new ItemCreator(Material.COMPASS)
-            .name(ChatUtils.PINK + "Navigation Compass")
-            .lore(ChatUtils.GRAY + "Right click to teleport to that position.")
-            .build());
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.SPECTATE-MENU-ITEM.NAME")));
 
-        player.getInventory().setItem(8, new ItemCreator(Material.BED)
-            .name(ChatUtils.GREEN + "Return to Lobby")
-            .lore(ChatUtils.GRAY + "Right click to return to the main Lobby.")
-            .build());
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.SPECTATE-MENU-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.SPECTATE-MENU-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.SPECTATE-MENU-ITEM.SLOT"), item);
+        }
+
+        /**
+         * Random teleport item
+         */
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.RANDOM-TELEPORT-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.RANDOM-TELEPORT-ITEM.ID"));
+
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.RANDOM-TELEPORT-ITEM.NAME")));
+
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.RANDOM-TELEPORT-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.RANDOM-TELEPORT-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.RANDOM-TELEPORT-ITEM.SLOT"), item);
+        }
+
+        /**
+         * Navigation Compass Item
+         */
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.NAVIGATION-COMPASS-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.NAVIGATION-COMPASS-ITEM.ID"));
+
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.NAVIGATION-COMPASS-ITEM.NAME")));
+
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.NAVIGATION-COMPASS-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.NAVIGATION-COMPASS-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.NAVIGATION-COMPASS-ITEM.SLOT"), item);
+        }
+
+        if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.LEAVE-GAME-ITEM.ENABLED")) {
+            ItemStack item = new ItemStack(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LEAVE-GAME-ITEM.ID"));
+
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getString("ITEMS.LEAVE-GAME-ITEM.NAME")));
+
+            if (LatteMeetup.getPlugin().getItemsConfig().getBoolean("BOOLEANS.LEAVE-GAME-ITEM.LORE")) {
+                meta.setLore(ChatUtils.translate(LatteMeetup.getPlugin().getItemsConfig().getStringList("ITEMS.LEAVE-GAME-ITEM.LORE")));
+            }
+
+            item.setItemMeta(meta);
+            player.getInventory().setItem(LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LEAVE-GAME-ITEM.SLOT"), item);
+        }
         
         player.updateInventory();
     }
