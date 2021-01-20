@@ -1,0 +1,11 @@
+SCENARIOS:
+  NAME-COLOR: "&3"
+  LORE:
+    - "&7&m--------------------------"
+    - "&7<description>"
+    - ""
+    - "&bVotes&7:"
+    - "&f<votes>"
+    - ""
+    - "&aClick to vote.."
+    - "&7&m--------------------------"
