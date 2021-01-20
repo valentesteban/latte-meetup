@@ -88,7 +88,11 @@ public class PlayerListener implements Listener {
                     player.teleport(MeetupUtils.getScatterLocation());
                 }
 
-                Msg.sendMessage(ChatUtils.PRIMARY + player.getName() + ChatUtils.YELLOW + " has joined. " + ChatUtils.GRAY + "(" + Bukkit.getOnlinePlayers().size() + "/" + plugin.getMessagesConfig().getInteger("GAME.MAX-PLAYERS") + ")");
+                String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.PLAYER-JOIN")
+                    .replace("<player-name>", player.getName())
+                    .replace("<players-count>", "" + Bukkit.getOnlinePlayers().size())
+                    .replace("<max-players>", plugin.getMessagesConfig().getString("GAME.MAX-PLAYERS")));
+                player.sendMessage(format);
 
                 if(GameManager.getData().getGameState().equals(GameState.STARTING)) {
                     plugin.getKitManager().handleItems(player);
@@ -120,7 +124,10 @@ public class PlayerListener implements Listener {
             plugin.getGameManager().handleCheckWinners();
 
             /* If the player disconnect remove from the game and send this message */
-            Msg.sendMessage("&c" + player.getName() + ChatUtils.DARK_RED + "[" + playerData.getGameKills() + "] " + ChatUtils.GRAY + "has been disqualified for disconnecting.");
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.PLAYER-DISCONNECTED")
+                .replace("<player-name>", player.getName())
+                .replace("<player-kills>", "" + playerData.getGameKills()));
+            player.sendMessage(format);
 
             if(ScenarioManager.getByName("Time Bomb").isActive() && ScenarioManager.getByName("Safe Loot").isActive()) {
                 List<ItemStack> items = new ArrayList<>();
@@ -160,16 +167,53 @@ public class PlayerListener implements Listener {
 
             Player player = event.getPlayer();
 
-            switch (item.getType()) {
-                case BOOK:
-                    player.openInventory(plugin.getInventoryManager().getScenarioInventory());
-                    break;
-                case BED:
+            /**
+             * Lobby items
+             */
+            if (item.getType().getId() == LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.SCENARIOS-ITEM.ID")) {
+                player.openInventory(plugin.getInventoryManager().getScenarioInventory());
+                return;
+            }
+
+            if (item.getType().getId() == LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LEADERBOARDS-ITEM.ID")) {
+                new LeaderboardsMenu().openMenu(player);
+                return;
+            }
+
+            if (item.getType().getId() == LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.LOBBY-ITEM.ID")) {
+                BungeeUtil.sendToServer(player, "hub");
+                return;
+            }
+
+            /**
+             * Spectator Items
+             */
+            if(PlayerData.getByName(player.getName()).isSpectator()) {
+                if (item.getType().getId() == LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.SPECTATE-MENU-ITEM.ID")) {
+                    if(PlayerData.getAlivePlayers() == 0) {
+                        player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
+                        return;
+                    }
+
+                    player.openInventory(plugin.getSpectatorManager().getInventory(1));
+                }
+
+                if (item.getType().getId() == LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.RANDOM-TELEPORT-ITEM.ID")) {
+                    if(PlayerData.getAlivePlayers() == 0) {
+                        player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
+                        return;
+                    }
+
+                    plugin.getSpectatorManager().handleRandomTeleport(player);
+                }
+
+                if (item.getType().getId() == LatteMeetup.getPlugin().getItemsConfig().getInteger("ITEMS.GAME-LEAVE-ITEM.ID")) {
                     BungeeUtil.sendToServer(player, "hub");
-                    break;
-                case EMERALD:
-                    new LeaderboardsMenu().openMenu(player);
-                    break;
+                    return;
+                }
+            }
+
+            switch (item.getType()) {
                 case MUSHROOM_SOUP:
                     if(player.getHealth() <= 19.0D && !player.isDead()) {
                         if(player.getHealth() < 20.0D || player.getFoodLevel() < 20) {
@@ -188,30 +232,6 @@ public class PlayerListener implements Listener {
                     event.setUseInteractedBlock(Event.Result.DENY);
                     player.sendMessage(ChatColor.RED + "Crafting tables are disabled.");
                     break;
-            }
-
-            if(PlayerData.getByName(player.getName()).isSpectator()) {
-                switch (player.getItemInHand().getType()) {
-                    case ITEM_FRAME:
-                        if(PlayerData.getAlivePlayers() == 0) {
-                            player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
-                            return;
-                        }
-
-                        player.openInventory(plugin.getSpectatorManager().getInventory(1));
-                        break;
-                    case DIAMOND:
-                        if(PlayerData.getAlivePlayers() == 0) {
-                            player.sendMessage(ChatUtils.translate("&cThere are currently no alive players."));
-                            return;
-                        }
-
-                        plugin.getSpectatorManager().handleRandomTeleport(player);
-                        break;
-                    case BED:
-                        BungeeUtil.sendToServer(player, "hub");
-                        break;
-                }
             }
         }
     }
