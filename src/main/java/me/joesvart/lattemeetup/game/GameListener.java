@@ -29,6 +29,8 @@ import java.util.stream.Stream;
 
 public class GameListener implements Listener {
 
+    private final LatteMeetup plugin = LatteMeetup.getInstance();
+
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
@@ -132,7 +134,11 @@ public class GameListener implements Listener {
         double health = Math.ceil(entity.getHealth() - event.getFinalDamage()) / 2.0D;
 
         if(health > 0.0D) {
-            shooter.sendMessage(ChatUtils.translate( entity.getDisplayName() + ChatUtils.SECONDARY + " is now at " + ChatUtils.PRIMARY + health + "&4" + Msg.HEART + ChatUtils.SECONDARY + "."));
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.BOW-DAMAGE")
+                .replace("<player-name>", entity.getDisplayName())
+                .replace("<health>", "" + health))
+                .replace("<heart-symbol>", "" + Msg.HEART);
+            shooter.sendMessage(format);
         }
     }
 }
