@@ -19,6 +19,8 @@ import java.util.Objects;
 
 public class EndTask extends BukkitRunnable {
 
+    private final LatteMeetup plugin = LatteMeetup.getInstance();
+
     private int launchedFireworks;
 
     public EndTask() {
@@ -52,7 +54,9 @@ public class EndTask extends BukkitRunnable {
         }
 
         if(Arrays.asList(15, 10, 5, 4, 3, 2, 1).contains(data.getEndTime())) {
-            Msg.sendMessage(ChatUtils.SECONDARY + "The game ends in " + ChatUtils.PRIMARY + data.getEndTime() + ChatUtils.SECONDARY + " second" + (data.getEndTime() > 1 ? "s" : "") + ".");
+            String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.GAME-END-TIME")
+                .replace("<time>", "" + data.getEndTime()));
+            Msg.sendMessage(format);
 
             if (LatteMeetup.getInstance().getMessagesConfig().getBoolean("BOOLEANS.SOUNDS")) {
                 Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1F, 1F));
