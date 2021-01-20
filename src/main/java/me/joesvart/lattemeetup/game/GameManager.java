@@ -47,7 +47,10 @@ public class GameManager {
 
         /* Game successfully started message */
         Msg.sendMessage("");
-        Msg.sendMessage(ChatUtils.PRIMARY + scenario.getName() + ChatUtils.SECONDARY + " has been voted for this game's scenario. " + ChatUtils.GRAY + "(" + plugin.getVoteManager().getVotes().get(scenario) + ")");
+        String format = ChatUtils.translate(plugin.getMessagesConfig().getString("MESSAGES.GAME-SCENARIO")
+            .replace("<scenario>", scenario.getName())
+            .replace("<votes>", "" + plugin.getVoteManager().getVotes().get(scenario)));
+        Msg.sendMessage(format);
         Msg.sendMessage("");
 
         Bukkit.getOnlinePlayers().forEach(player -> {
@@ -63,12 +66,12 @@ public class GameManager {
         });
 
         /* Game error message */
-        if (Bukkit.getOnlinePlayers().size() <= plugin.getMessagesConfig().getInteger("GAME.MIN-PLAYERS")) {
+        if (Bukkit.getOnlinePlayers().size() < plugin.getMessagesConfig().getInteger("GAME.MIN-PLAYERS")) {
             Bukkit.broadcastMessage(ChatUtils.translate(""));
             Bukkit.broadcastMessage(ChatUtils.translate("&8[&4Error&8] &7The game cannot continue as there are not enough players to play!"));
             Bukkit.broadcastMessage(ChatUtils.translate(""));
 
-            this.plugin.getGameManager().handleCheckWinners();
+            plugin.getGameManager().handleCheckWinners();
         }
 
         data.setScenario(scenario.getName());
