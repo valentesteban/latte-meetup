@@ -2,6 +2,7 @@ package me.joesvart.lattemeetup.commands;
 
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.commands.impl.InventoryCommand;
+import me.joesvart.lattemeetup.commands.impl.SetSpawnCommnad;
 import me.joesvart.lattemeetup.commands.impl.StartCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,8 +15,9 @@ public class CommandsManager {
     public CommandsManager() {
         Arrays.asList(
 
-                // UHC-Meetup Commands
+                // LatteMeetup Commands
                 new InventoryCommand(),
+                new SetSpawnCommnad(),
                 new StartCommand()
         ).forEach(this::registerCommand);
     }
