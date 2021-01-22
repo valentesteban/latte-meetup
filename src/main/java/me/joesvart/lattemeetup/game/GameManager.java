@@ -2,6 +2,7 @@ package me.joesvart.lattemeetup.game;
 
 import me.joesvart.lattelibs.chat.ChatUtils;
 import me.joesvart.lattelibs.chat.Clickable;
+import me.joesvart.lattelibs.utils.PlayerUtils;
 import me.joesvart.lattemeetup.LatteMeetup;
 import me.joesvart.lattemeetup.player.PlayerData;
 import me.joesvart.lattemeetup.player.PlayerState;
@@ -105,23 +106,22 @@ public class GameManager {
     private void handleSelectWinner(PlayerData winner) {
         broadcasted = true;
 
-        /* Game successfully ended message */
-        Msg.sendMessage("&7&m" + StringUtils.repeat('-', 45));
-        Msg.sendMessage(ChatUtils.D_GREEN + ChatUtils.B + "Post-Game Results " + ChatUtils.GRAY + '▏' + ChatUtils.RESET + " Click names to view inventories");
-        Msg.sendMessage("");
-
         GameData data = GameManager.getData();
 
         /* Add wins to the profile of the player */
         winner.setWins(winner.getWins() + 1);
         data.setWinner(winner.getName());
 
+        /* Game successfully ended message */
+        for (String line : ChatUtils.translate(plugin.getMessagesConfig().getStringList("WINNER-MESSAGE"))) {
+            line = line.replaceAll("<winner>", data.getWinner());
+            line = line.replaceAll("<winner-kills>", String.valueOf(winner.getGameKills()));
+            line = line.replaceAll("<winner-total-wins>", String.valueOf(winner.getWins()));
 
-        Clickable clickable = new Clickable(ChatUtils.SECONDARY + "Winner: ");
-        clickable.add(ChatUtils.PRIMARY + data.getWinner(), ChatUtils.GREEN + "View inventory.", "/uinv " + data.getWinner());
-        Bukkit.getOnlinePlayers().forEach(o -> clickable.sendToPlayer(o));
-        Msg.sendMessage(ChatUtils.SECONDARY + "Kills: " + ChatUtils.PRIMARY + winner.getGameKills() + ChatUtils.GRAY + " - " + ChatUtils.SECONDARY + "Total Wins: " + ChatUtils.PRIMARY + winner.getWins());
-        Msg.sendMessage("&7&m" + StringUtils.repeat('-', 45));
+            Msg.sendMessage(line);
+        }
+
+        /* Set the game state */
         data.setGameState(GameState.ENDED);
 
         new EndTask();
