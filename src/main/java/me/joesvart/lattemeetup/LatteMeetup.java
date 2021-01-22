@@ -17,7 +17,7 @@ import me.joesvart.lattemeetup.game.GameManager;
 import me.joesvart.lattemeetup.managers.KitManager;
 import me.joesvart.lattemeetup.listeners.LobbyListener;
 import me.joesvart.lattemeetup.listeners.PlayerListener;
-import me.joesvart.lattemeetup.providers.MeetupTab;
+import me.joesvart.lattemeetup.providers.TablistProvider;
 import me.joesvart.lattemeetup.scenario.ScenarioManager;
 import me.joesvart.lattemeetup.managers.VoteManager;
 import me.joesvart.lattemeetup.listeners.DeathMessagesListener;
@@ -25,7 +25,7 @@ import me.joesvart.lattemeetup.listeners.SpectatorListener;
 import me.joesvart.lattemeetup.managers.InventoryManager;
 import me.joesvart.lattemeetup.managers.ItemManager;
 import me.joesvart.lattemeetup.managers.SpectatorManager;
-import me.joesvart.lattemeetup.providers.MeetupBoard;
+import me.joesvart.lattemeetup.providers.ScoreboardProvider;
 import me.joesvart.lattemeetup.tasks.VoteTask;
 import me.joesvart.lattemeetup.util.other.MeetupUtils;
 import lombok.Getter;
@@ -88,8 +88,7 @@ public class LatteMeetup extends JavaPlugin {
         registerCommands();
         registerListeners();
         registerManagers();
-        registerBoard();
-        registerTab();
+        registerProviders();
 
         /**
          * Initialize the Vote Stage
@@ -138,20 +137,18 @@ public class LatteMeetup extends JavaPlugin {
         inventoryManager = new InventoryManager();
     }
 
-    private void registerBoard() {
+    private void registerProviders() {
         /**
          * Register the Scoreboard
          */
-        Board board = new Board(this, new MeetupBoard());
+        Board board = new Board(this, new ScoreboardProvider());
         board.setTicks(2);
         board.setBoardStyle(BoardStyle.MODERN);
-    }
 
-    private void registerTab() {
         /**
          * Register the Tablist
          */
-        new LatteTab(this, new MeetupTab());
+        new LatteTab(this, new TablistProvider());
     }
 
     public void loadPerfectWorld() {
