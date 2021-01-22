@@ -29,3 +29,11 @@ MESSAGES:
 
   BOW-DAMAGE: "&3<player-name> &bis now at &3<health> &4<heart-symbol>"
 
+WINNER-MESSAGE:
+  - "&7&m--------------------------------------------------"
+  - "&3&lPost-Game Results"
+  - ""
+  - "&3Winner&7: &f<winner>"
+  - "&3Kills&7: &f<winner-kills> &7- &3Total Wins&7: &f<winner-total-wins>"
+  - "&7&m--------------------------------------------------"
+
