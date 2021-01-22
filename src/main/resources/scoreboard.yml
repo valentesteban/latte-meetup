@@ -18,7 +18,6 @@ SCOREBOARD:
     - ""
   PLAYING:
     - ""
-    - "&3Game time&7: &f<game-time>"
     - "&3Remaining&7: &f<remaining>&7/&f<max-players>"
     - ""
     - "&3Kills&7: &f<kills>"
