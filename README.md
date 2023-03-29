@@ -1,4 +1,4 @@
 # latte-meetup
 This is a shortened version of what is known as UHC, it has fewer options but the same quality, perfect for UHC players, quick games, etc.  Updated for Koru Network.
 
-### This is an old project that I made on my old GitHub account in the pandemic.
+### This is an old project that I made with my old GitHub account in the pandemic.
